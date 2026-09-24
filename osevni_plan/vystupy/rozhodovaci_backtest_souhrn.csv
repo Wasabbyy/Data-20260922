@@ -1,0 +1,7 @@
+strategie,prumer,median,smer_odch,nejhorsi_rok,roky_se_ztratou,soucet
+mean-CVaR (lambda 0.5),28.75,26.51,15.25,5.52,0,402.46
+max. očekávání (lambda 0),27.65,21.07,19.16,-4.74,1,387.08
+"mean-CVaR, výnosy prumer3",27.16,23.12,14.68,10.84,0,380.29
+jen CVaR (lambda 1),25.7,20.82,11.58,9.51,0,359.84
+rovnoměrně polní plodiny,11.27,10.45,5.58,2.36,0,157.78
+naivní: loňské marže,2.78,18.54,44.08,-112.15,4,38.93

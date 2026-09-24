@@ -1,0 +1,482 @@
+{
+  "backtest_ceny": {
+    "kombinace": {
+      "mae": 0.14,
+      "bias": 0.0244,
+      "crps": 0.1077,
+      "pokryti80": 0.8071,
+      "pokryti95": 0.9143,
+      "is80": 0.7255,
+      "mae_vs_bench": 0.9478,
+      "crps_vs_bench": 0.947,
+      "podil_lepsi_nez_bench": 0.5571
+    },
+    "naivni": {
+      "mae": 0.1477,
+      "bias": 0.038,
+      "crps": 0.1137,
+      "pokryti80": 0.825,
+      "pokryti95": 0.9321,
+      "is80": 0.7549,
+      "mae_vs_bench": 1.0,
+      "crps_vs_bench": 1.0,
+      "podil_lepsi_nez_bench": 0.0
+    },
+    "ar_sdileny": {
+      "mae": 0.1493,
+      "bias": 0.0108,
+      "crps": 0.1139,
+      "pokryti80": 0.7643,
+      "pokryti95": 0.9071,
+      "is80": 0.7551,
+      "mae_vs_bench": 1.0107,
+      "crps_vs_bench": 1.0017,
+      "podil_lepsi_nez_bench": 0.4893
+    },
+    "ar_plodina": {
+      "mae": 0.1451,
+      "bias": 0.0162,
+      "crps": 0.1145,
+      "pokryti80": 0.8036,
+      "pokryti95": 0.9214,
+      "is80": 0.7611,
+      "mae_vs_bench": 0.9825,
+      "crps_vs_bench": 1.0069,
+      "podil_lepsi_nez_bench": 0.4786
+    },
+    "drift": {
+      "mae": 0.1491,
+      "bias": 0.0168,
+      "crps": 0.1166,
+      "pokryti80": 0.8214,
+      "pokryti95": 0.9393,
+      "is80": 0.7721,
+      "mae_vs_bench": 1.0098,
+      "crps_vs_bench": 1.0254,
+      "podil_lepsi_nez_bench": 0.4929
+    },
+    "ar_sdileny_kurz": {
+      "mae": 0.1509,
+      "bias": 0.0189,
+      "crps": 0.1211,
+      "pokryti80": 0.8964,
+      "pokryti95": 0.9536,
+      "is80": 0.8817,
+      "mae_vs_bench": 1.0218,
+      "crps_vs_bench": 1.0652,
+      "podil_lepsi_nez_bench": 0.4929
+    }
+  },
+  "backtest_vynosy": {
+    "prumer3": {
+      "mae": 0.1401,
+      "bias": 0.0408,
+      "crps": 0.1056,
+      "pokryti80": 0.8143,
+      "pokryti95": 0.9143,
+      "is80": 0.7526,
+      "mae_vs_bench": 0.8549,
+      "crps_vs_bench": 0.8228,
+      "podil_lepsi_nez_bench": 0.6179
+    },
+    "prumer5": {
+      "mae": 0.1439,
+      "bias": 0.0597,
+      "crps": 0.1067,
+      "pokryti80": 0.825,
+      "pokryti95": 0.9071,
+      "is80": 0.756,
+      "mae_vs_bench": 0.8783,
+      "crps_vs_bench": 0.8311,
+      "podil_lepsi_nez_bench": 0.5929
+    },
+    "kombinace": {
+      "mae": 0.138,
+      "bias": 0.0324,
+      "crps": 0.1075,
+      "pokryti80": 0.8214,
+      "pokryti95": 0.9143,
+      "is80": 0.7693,
+      "mae_vs_bench": 0.8422,
+      "crps_vs_bench": 0.8376,
+      "podil_lepsi_nez_bench": 0.5857
+    },
+    "trend": {
+      "mae": 0.1614,
+      "bias": -0.0123,
+      "crps": 0.1106,
+      "pokryti80": 0.8143,
+      "pokryti95": 0.9,
+      "is80": 0.7789,
+      "mae_vs_bench": 0.9849,
+      "crps_vs_bench": 0.8616,
+      "podil_lepsi_nez_bench": 0.5107
+    },
+    "trend15": {
+      "mae": 0.1419,
+      "bias": 0.005,
+      "crps": 0.1121,
+      "pokryti80": 0.8286,
+      "pokryti95": 0.9143,
+      "is80": 0.7964,
+      "mae_vs_bench": 0.866,
+      "crps_vs_bench": 0.873,
+      "podil_lepsi_nez_bench": 0.5536
+    },
+    "trend15_pocasi": {
+      "mae": 0.1419,
+      "bias": 0.005,
+      "crps": 0.1121,
+      "pokryti80": 0.8214,
+      "pokryti95": 0.9179,
+      "is80": 0.7932,
+      "mae_vs_bench": 0.866,
+      "crps_vs_bench": 0.8734,
+      "podil_lepsi_nez_bench": 0.5536
+    },
+    "trend15_robustni": {
+      "mae": 0.1491,
+      "bias": -0.0008,
+      "crps": 0.1167,
+      "pokryti80": 0.8214,
+      "pokryti95": 0.9179,
+      "is80": 0.8032,
+      "mae_vs_bench": 0.91,
+      "crps_vs_bench": 0.9095,
+      "podil_lepsi_nez_bench": 0.5143
+    },
+    "naivni": {
+      "mae": 0.1639,
+      "bias": 0.0264,
+      "crps": 0.1284,
+      "pokryti80": 0.8036,
+      "pokryti95": 0.9107,
+      "is80": 0.9014,
+      "mae_vs_bench": 1.0,
+      "crps_vs_bench": 1.0,
+      "podil_lepsi_nez_bench": 0.0
+    }
+  },
+  "diebold_mariano_t_p": {
+    "ceny_kombinace_vs_naivni": [
+      -1.9686522268199254,
+      0.07069063843420875
+    ],
+    "ceny_ar_sdileny_vs_naivni": [
+      0.033211609002026146,
+      0.9740103537129381
+    ],
+    "vynosy_kombinace_vs_naivni": [
+      -2.720061928340665,
+      0.017510838584018806
+    ],
+    "vynosy_kombinace_vs_prumer5": [
+      0.7436582554769533,
+      0.47031117685742796
+    ],
+    "vynosy_kombinace_vs_prumer3": [
+      0.82721981120436,
+      0.42303746744622006
+    ],
+    "vynosy_kombinace_vs_prumer3_mae": [
+      -0.6874248587154641,
+      0.5038952578793077
+    ],
+    "vynosy_pocasi_vs_trend15": [
+      0.18668569651669834,
+      0.8547889266208479
+    ]
+  },
+  "pocasi": {
+    "mae_klimatologie": 0.1419106126781416,
+    "mae_oracle_se_znalosti_pocasi": 0.1448915531829423,
+    "koeficienty_na_1_sd": {
+      "Řepka": {
+        "srazky": -0.0462,
+        "teplota": -0.0302
+      },
+      "Hrách na zrno": {
+        "srazky": -0.0357,
+        "teplota": -0.017
+      },
+      "Pšenice": {
+        "srazky": -0.0098,
+        "teplota": 0.0129
+      },
+      "Zelí": {
+        "srazky": 0.0287,
+        "teplota": 0.0395
+      }
+    },
+    "sd_srazky_mm": 93.95873663533335,
+    "sd_teplota_c": 0.9546547308017992
+  },
+  "korelace": {
+    "cena_vynos_stejna_plodina": {
+      "Pšenice": 0.045,
+      "Ječmen": 0.032,
+      "Žito": 0.161,
+      "Oves": -0.107,
+      "Kukuřice na zrno": 0.043,
+      "Řepka": -0.132,
+      "Slunečnice": 0.35,
+      "Len olejný": 0.303,
+      "Hrách na zrno": 0.155,
+      "Cukrová řepa": 0.142,
+      "Brambory": -0.366,
+      "Zelí": -0.082,
+      "Mrkev a tuřín": -0.105,
+      "Květák a brokolice": -0.046,
+      "Papriky a chilli": 0.145,
+      "Okurky a nakládačky": -0.086,
+      "Zelený česnek": 0.06,
+      "Salát a čekanka": 0.162,
+      "Cibule a šalotka": -0.377,
+      "Rajčata": 0.19
+    },
+    "ceny_obiloviny": {
+      "Pšenice": {
+        "Pšenice": 1.0,
+        "Ječmen": 0.93,
+        "Žito": 0.93,
+        "Kukuřice na zrno": 0.94
+      },
+      "Ječmen": {
+        "Pšenice": 0.93,
+        "Ječmen": 1.0,
+        "Žito": 0.94,
+        "Kukuřice na zrno": 0.88
+      },
+      "Žito": {
+        "Pšenice": 0.93,
+        "Ječmen": 0.94,
+        "Žito": 1.0,
+        "Kukuřice na zrno": 0.91
+      },
+      "Kukuřice na zrno": {
+        "Pšenice": 0.94,
+        "Ječmen": 0.88,
+        "Žito": 0.91,
+        "Kukuřice na zrno": 1.0
+      }
+    },
+    "psenice_jecmen_chyby_vs_scenare": [
+      0.931,
+      0.934
+    ],
+    "prumerna_korelace_chyb_cen": 0.17640551199389382,
+    "prumerna_korelace_chyb_vynosu": 0.15263426215074685
+  },
+  "predikce_info": {
+    "model_cen": "kombinace",
+    "model_vynosu": "kombinace",
+    "ocekavana_inflace_2025": 0.024,
+    "roky_v_poolu_chyb": [
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "bod_ln_cena": {
+      "0111": 8.5671,
+      "0115": 8.7333,
+      "0116": 8.5418,
+      "0117": 8.9675,
+      "0112": 8.5285,
+      "01443": 9.4219,
+      "01445": 9.2785,
+      "01441": 9.7137,
+      "01705": 8.8333,
+      "01801": 6.8849,
+      "01510": 9.022,
+      "01212": 9.1148,
+      "01251": 9.21,
+      "01213": 10.2939,
+      "01231": 10.2425,
+      "01232": 10.3268,
+      "01252": 11.7931,
+      "01214": 10.8419,
+      "01253.02": 9.3173,
+      "01234": 10.6844
+    },
+    "bod_ln_vynos": {
+      "0111": 8.7497,
+      "0115": 8.6334,
+      "0116": 8.5369,
+      "0117": 8.1661,
+      "0112": 9.0479,
+      "01443": 8.0773,
+      "01445": 7.8849,
+      "01441": 7.1299,
+      "01705": 7.7641,
+      "01801": 11.1157,
+      "01510": 10.2782,
+      "01212": 10.5019,
+      "01251": 10.6146,
+      "01213": 9.7118,
+      "01231": 10.6702,
+      "01232": 11.0987,
+      "01252": 8.3837,
+      "01214": 10.2103,
+      "01253.02": 10.2408,
+      "01234": 11.5979
+    }
+  },
+  "plan_riziko": {
+    "0.0": {
+      "ocekavany_zisk": 82378681.577,
+      "median": 35437852.376,
+      "smer_odchylka": 183434069.654,
+      "semismer_odchylka": 89038100.31,
+      "VaR10": -79966487.495,
+      "CVaR10": -107043122.758,
+      "p_ztraty": 0.344
+    },
+    "0.25": {
+      "ocekavany_zisk": 69491976.507,
+      "median": 39274551.297,
+      "smer_odchylka": 118743887.76,
+      "semismer_odchylka": 56492415.0,
+      "VaR10": -29552582.769,
+      "CVaR10": -50516000.045,
+      "p_ztraty": 0.246
+    },
+    "0.5": {
+      "ocekavany_zisk": 44586793.44,
+      "median": 36344670.286,
+      "smer_odchylka": 42800997.56,
+      "semismer_odchylka": 21871924.954,
+      "VaR10": 4400555.329,
+      "CVaR10": -3433134.194,
+      "p_ztraty": 0.065
+    },
+    "0.75": {
+      "ocekavany_zisk": 32256632.043,
+      "median": 30495453.99,
+      "smer_odchylka": 19591458.404,
+      "semismer_odchylka": 11945724.084,
+      "VaR10": 9812488.876,
+      "CVaR10": 4964916.315,
+      "p_ztraty": 0.011
+    },
+    "1.0": {
+      "ocekavany_zisk": 28678734.476,
+      "median": 27651212.526,
+      "smer_odchylka": 15422538.969,
+      "semismer_odchylka": 10123016.584,
+      "VaR10": 10001966.303,
+      "CVaR10": 5323052.686,
+      "p_ztraty": 0.008
+    }
+  },
+  "rozhodovaci_backtest": {
+    "mean-CVaR (lambda 0.5)": {
+      "prumer": 28.75,
+      "median": 26.51,
+      "smer_odch": 15.25,
+      "nejhorsi_rok": 5.52,
+      "roky_se_ztratou": 0,
+      "soucet": 402.46
+    },
+    "max. očekávání (lambda 0)": {
+      "prumer": 27.65,
+      "median": 21.07,
+      "smer_odch": 19.16,
+      "nejhorsi_rok": -4.74,
+      "roky_se_ztratou": 1,
+      "soucet": 387.08
+    },
+    "mean-CVaR, výnosy prumer3": {
+      "prumer": 27.16,
+      "median": 23.12,
+      "smer_odch": 14.68,
+      "nejhorsi_rok": 10.84,
+      "roky_se_ztratou": 0,
+      "soucet": 380.29
+    },
+    "jen CVaR (lambda 1)": {
+      "prumer": 25.7,
+      "median": 20.82,
+      "smer_odch": 11.58,
+      "nejhorsi_rok": 9.51,
+      "roky_se_ztratou": 0,
+      "soucet": 359.84
+    },
+    "rovnoměrně polní plodiny": {
+      "prumer": 11.27,
+      "median": 10.45,
+      "smer_odch": 5.58,
+      "nejhorsi_rok": 2.36,
+      "roky_se_ztratou": 0,
+      "soucet": 157.78
+    },
+    "naivní: loňské marže": {
+      "prumer": 2.78,
+      "median": 18.54,
+      "smer_odch": 44.08,
+      "nejhorsi_rok": -112.15,
+      "roky_se_ztratou": 4,
+      "soucet": 38.93
+    }
+  },
+  "citlivost_riziko": {
+    "hlavní (vyhlazený bootstrap)": {
+      "ocekavany_zisk": 44586793.44,
+      "median": 36344670.286,
+      "smer_odchylka": 42800997.56,
+      "semismer_odchylka": 21871924.954,
+      "VaR10": 4400555.329,
+      "CVaR10": -3433134.194,
+      "p_ztraty": 0.065,
+      "prumerna_marze_salat": 336958.66
+    },
+    "bez vyhlazení": {
+      "ocekavany_zisk": 47407629.96,
+      "median": 35643716.609,
+      "smer_odchylka": 50221960.39,
+      "semismer_odchylka": 26007688.36,
+      "VaR10": 890756.684,
+      "CVaR10": 547431.113,
+      "p_ztraty": 0.044,
+      "prumerna_marze_salat": 340037.48
+    },
+    "výnosy prumer3": {
+      "ocekavany_zisk": 28348904.245,
+      "median": 26158341.423,
+      "smer_odchylka": 18325529.756,
+      "semismer_odchylka": 11914406.475,
+      "VaR10": 6487076.152,
+      "CVaR10": 1717238.871,
+      "p_ztraty": 0.028,
+      "prumerna_marze_salat": -1303.271
+    },
+    "výnosy prumer3, bez vyhlazení": {
+      "ocekavany_zisk": 26404048.75,
+      "median": 22079290.784,
+      "smer_odchylka": 19340777.588,
+      "semismer_odchylka": 11088745.909,
+      "VaR10": 7252003.531,
+      "CVaR10": 6395233.73,
+      "p_ztraty": 0.0,
+      "prumerna_marze_salat": 1220.556
+    }
+  }
+}
