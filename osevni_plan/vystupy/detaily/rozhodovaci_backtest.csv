@@ -1,0 +1,85 @@
+rok,strategie,zisk_mil_kc_2024,ha_zelenina
+2011,mean-CVaR (lambda 0.5),5.523,200.0
+2011,"mean-CVaR, výnosy prumer3",11.982,132.934
+2011,max. očekávání (lambda 0),6.317,200.0
+2011,jen CVaR (lambda 1),15.819,31.768
+2011,naivní: loňské marže,8.845,200.0
+2011,rovnoměrně polní plodiny,13.229,0.0
+2012,mean-CVaR (lambda 0.5),20.957,17.487
+2012,"mean-CVaR, výnosy prumer3",22.046,0.0
+2012,max. očekávání (lambda 0),16.7,200.0
+2012,jen CVaR (lambda 1),20.296,6.391
+2012,naivní: loňské marže,16.523,200.0
+2012,rovnoměrně polní plodiny,2.363,0.0
+2013,mean-CVaR (lambda 0.5),21.98,0.0
+2013,"mean-CVaR, výnosy prumer3",22.039,0.0
+2013,max. očekávání (lambda 0),50.271,200.0
+2013,jen CVaR (lambda 1),20.719,0.0
+2013,naivní: loňské marže,21.98,0.0
+2013,rovnoměrně polní plodiny,13.324,0.0
+2014,mean-CVaR (lambda 0.5),63.111,200.0
+2014,"mean-CVaR, výnosy prumer3",60.993,200.0
+2014,max. očekávání (lambda 0),63.111,200.0
+2014,jen CVaR (lambda 1),42.864,105.64
+2014,naivní: loňské marže,34.331,200.0
+2014,rovnoměrně polní plodiny,21.385,0.0
+2015,mean-CVaR (lambda 0.5),33.918,200.0
+2015,"mean-CVaR, výnosy prumer3",36.543,200.0
+2015,max. očekávání (lambda 0),19.987,200.0
+2015,jen CVaR (lambda 1),29.895,127.58
+2015,naivní: loňské marže,19.162,200.0
+2015,rovnoměrně polní plodiny,6.889,0.0
+2016,mean-CVaR (lambda 0.5),54.495,200.0
+2016,"mean-CVaR, výnosy prumer3",54.478,200.0
+2016,max. očekávání (lambda 0),53.861,200.0
+2016,jen CVaR (lambda 1),50.478,200.0
+2016,naivní: loňské marže,-112.148,200.0
+2016,rovnoměrně polní plodiny,18.093,0.0
+2017,mean-CVaR (lambda 0.5),27.511,200.0
+2017,"mean-CVaR, výnosy prumer3",27.741,200.0
+2017,max. očekávání (lambda 0),46.926,200.0
+2017,jen CVaR (lambda 1),27.47,200.0
+2017,naivní: loňské marže,19.428,200.0
+2017,rovnoměrně polní plodiny,8.458,0.0
+2018,mean-CVaR (lambda 0.5),22.254,200.0
+2018,"mean-CVaR, výnosy prumer3",15.505,200.0
+2018,max. očekávání (lambda 0),20.184,200.0
+2018,jen CVaR (lambda 1),14.305,56.401
+2018,naivní: loňské marže,-76.998,200.0
+2018,rovnoměrně polní plodiny,4.708,0.0
+2019,mean-CVaR (lambda 0.5),28.558,200.0
+2019,"mean-CVaR, výnosy prumer3",26.823,200.0
+2019,max. očekávání (lambda 0),30.339,200.0
+2019,jen CVaR (lambda 1),27.978,200.0
+2019,naivní: loňské marže,23.542,200.0
+2019,rovnoměrně polní plodiny,13.413,0.0
+2020,mean-CVaR (lambda 0.5),19.2,200.0
+2020,"mean-CVaR, výnosy prumer3",19.608,200.0
+2020,max. očekávání (lambda 0),19.761,200.0
+2020,jen CVaR (lambda 1),20.146,200.0
+2020,naivní: loňské marže,49.723,200.0
+2020,rovnoměrně polní plodiny,9.91,0.0
+2021,mean-CVaR (lambda 0.5),32.753,200.0
+2021,"mean-CVaR, výnosy prumer3",28.629,200.0
+2021,max. očekávání (lambda 0),21.953,200.0
+2021,jen CVaR (lambda 1),20.918,86.988
+2021,naivní: loňské marže,-3.345,200.0
+2021,rovnoměrně polní plodiny,10.182,0.0
+2022,mean-CVaR (lambda 0.5),35.324,200.0
+2022,"mean-CVaR, výnosy prumer3",18.872,200.0
+2022,max. očekávání (lambda 0),-4.745,200.0
+2022,jen CVaR (lambda 1),39.18,117.827
+2022,naivní: loňské marže,-6.477,200.0
+2022,rovnoměrně polní plodiny,19.132,0.0
+2023,mean-CVaR (lambda 0.5),25.5,200.0
+2023,"mean-CVaR, výnosy prumer3",24.188,200.0
+2023,max. očekávání (lambda 0),18.082,200.0
+2023,jen CVaR (lambda 1),20.262,140.857
+2023,naivní: loňské marže,26.46,200.0
+2023,rovnoměrně polní plodiny,10.721,0.0
+2024,mean-CVaR (lambda 0.5),11.379,200.0
+2024,"mean-CVaR, výnosy prumer3",10.838,200.0
+2024,max. očekávání (lambda 0),24.33,200.0
+2024,jen CVaR (lambda 1),9.507,200.0
+2024,naivní: loňské marže,17.908,200.0
+2024,rovnoměrně polní plodiny,5.974,0.0
