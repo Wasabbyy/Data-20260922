@@ -42,6 +42,13 @@ def test_modely_nevidi_budoucnost(data, modely):
         pd.testing.assert_series_equal(a, b, check_names=False, obj=nazev)
 
 
+def test_arima_vynos_finite(data):
+    K = md.Kontext.z_dat(data)
+    pred = md.vynos_arima(K.do(2015), 2015)
+    assert pred.index.tolist() == dt.KODY
+    assert np.isfinite(pred.to_numpy()).all()
+
+
 def test_crps_bodove_predikce():
     # Pro "vzorek" s jedinou hodnotou je CRPS rovno absolutní chybě
     assert bt.crps_vzorek(np.full(100, 2.0), 3.5) == pytest.approx(1.5)

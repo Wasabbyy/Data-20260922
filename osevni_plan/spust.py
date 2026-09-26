@@ -64,6 +64,7 @@ def krok_backtest(K: md.Kontext):
         "vynosy_kombinace_vs_prumer5": bt.diebold_mariano(my, "kombinace", "prumer5"),
         "vynosy_kombinace_vs_prumer3": bt.diebold_mariano(my, "kombinace", "prumer3"),
         "vynosy_kombinace_vs_prumer3_mae": bt.diebold_mariano(my, "kombinace", "prumer3", "abs_chyba"),
+        "vynosy_arima_vs_naivni": bt.diebold_mariano(my, "arima", "naivni"),
         "vynosy_pocasi_vs_trend15": bt.diebold_mariano(my, "trend15_pocasi", "trend15"),
     }
     return btc, bty, mc, my, sc, sy, dm

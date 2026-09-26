@@ -155,117 +155,132 @@
       "mae_vs_bench": 1.0,
       "crps_vs_bench": 1.0,
       "podil_lepsi_nez_bench": 0.0
+    },
+    "arima": {
+      "mae": 0.1639,
+      "bias": 0.0264,
+      "crps": 0.1289,
+      "pokryti80": 0.8071,
+      "pokryti95": 0.9071,
+      "is80": 0.9081,
+      "mae_vs_bench": 1.0,
+      "crps_vs_bench": 1.0041,
+      "podil_lepsi_nez_bench": 0.0
     }
   },
   "diebold_mariano_t_p": {
     "ceny_kombinace_vs_naivni": [
-      -1.9686522268199254,
-      0.07069063843420875
+      -1.9686522268199298,
+      0.07069063843420809
     ],
     "ceny_ar_sdileny_vs_naivni": [
-      0.033211609002026146,
-      0.9740103537129381
+      0.033211609002027,
+      0.9740103537129374
     ],
     "vynosy_kombinace_vs_naivni": [
-      -2.720061928340665,
+      -2.720061928340667,
       0.017510838584018806
     ],
     "vynosy_kombinace_vs_prumer5": [
-      0.7436582554769533,
-      0.47031117685742796
+      0.7436582554773052,
+      0.4703111768572221
     ],
     "vynosy_kombinace_vs_prumer3": [
-      0.82721981120436,
-      0.42303746744622006
+      0.8272198112044792,
+      0.423037467446155
     ],
     "vynosy_kombinace_vs_prumer3_mae": [
-      -0.6874248587154641,
-      0.5038952578793077
+      -0.6874248587151834,
+      0.5038952578794786
+    ],
+    "vynosy_arima_vs_naivni": [
+      2.002935504743701,
+      0.06648985566285903
     ],
     "vynosy_pocasi_vs_trend15": [
-      0.18668569651669834,
-      0.8547889266208479
+      0.18668569651807973,
+      0.8547889266197868
     ]
   },
   "pocasi": {
-    "mae_klimatologie": 0.1419106126781416,
-    "mae_oracle_se_znalosti_pocasi": 0.1448915531829423,
+    "mae_klimatologie": 0.14191061267814292,
+    "mae_oracle_se_znalosti_pocasi": 0.14489155318294214,
     "koeficienty_na_1_sd": {
-      "≈òepka": {
+      "ÿepka": {
         "srazky": -0.0462,
         "teplota": -0.0302
       },
-      "Hr√°ch na zrno": {
+      "Hr·ch na zrno": {
         "srazky": -0.0357,
         "teplota": -0.017
       },
-      "P≈°enice": {
-        "srazky": -0.0098,
-        "teplota": 0.0129
-      },
-      "Zel√≠": {
+      "ZelÌ": {
         "srazky": 0.0287,
         "teplota": 0.0395
+      },
+      "Pöenice": {
+        "srazky": -0.0098,
+        "teplota": 0.0129
       }
     },
     "sd_srazky_mm": 93.95873663533335,
-    "sd_teplota_c": 0.9546547308017992
+    "sd_teplota_c": 0.9546547308017991
   },
   "korelace": {
     "cena_vynos_stejna_plodina": {
-      "P≈°enice": 0.045,
-      "Jeƒçmen": 0.032,
-      "≈Ωito": 0.161,
+      "Pöenice": 0.045,
+      "JeËmen": 0.032,
+      "éito": 0.161,
       "Oves": -0.107,
-      "Kuku≈ôice na zrno": 0.043,
-      "≈òepka": -0.132,
-      "Sluneƒçnice": 0.35,
-      "Len olejn√Ω": 0.303,
-      "Hr√°ch na zrno": 0.155,
-      "Cukrov√° ≈ôepa": 0.142,
+      "Kuku¯ice na zrno": 0.043,
+      "ÿepka": -0.132,
+      "SluneËnice": 0.35,
+      "Len olejn˝": 0.303,
+      "Hr·ch na zrno": 0.155,
+      "Cukrov· ¯epa": 0.142,
       "Brambory": -0.366,
-      "Zel√≠": -0.082,
-      "Mrkev a tu≈ô√≠n": -0.105,
-      "Kvƒõt√°k a brokolice": -0.046,
+      "ZelÌ": -0.082,
+      "Mrkev a tu¯Ìn": -0.105,
+      "KvÏt·k a brokolice": -0.046,
       "Papriky a chilli": 0.145,
-      "Okurky a nakl√°daƒçky": -0.086,
-      "Zelen√Ω ƒçesnek": 0.06,
-      "Sal√°t a ƒçekanka": 0.162,
-      "Cibule a ≈°alotka": -0.377,
-      "Rajƒçata": 0.19
+      "Okurky a nakl·daËky": -0.086,
+      "Zelen˝ Ëesnek": 0.06,
+      "Sal·t a Ëekanka": 0.162,
+      "Cibule a öalotka": -0.377,
+      "RajËata": 0.19
     },
     "ceny_obiloviny": {
-      "P≈°enice": {
-        "P≈°enice": 1.0,
-        "Jeƒçmen": 0.93,
-        "≈Ωito": 0.93,
-        "Kuku≈ôice na zrno": 0.94
+      "Pöenice": {
+        "Pöenice": 1.0,
+        "JeËmen": 0.93,
+        "éito": 0.93,
+        "Kuku¯ice na zrno": 0.94
       },
-      "Jeƒçmen": {
-        "P≈°enice": 0.93,
-        "Jeƒçmen": 1.0,
-        "≈Ωito": 0.94,
-        "Kuku≈ôice na zrno": 0.88
+      "JeËmen": {
+        "Pöenice": 0.93,
+        "JeËmen": 1.0,
+        "éito": 0.94,
+        "Kuku¯ice na zrno": 0.88
       },
-      "≈Ωito": {
-        "P≈°enice": 0.93,
-        "Jeƒçmen": 0.94,
-        "≈Ωito": 1.0,
-        "Kuku≈ôice na zrno": 0.91
+      "éito": {
+        "Pöenice": 0.93,
+        "JeËmen": 0.94,
+        "éito": 1.0,
+        "Kuku¯ice na zrno": 0.91
       },
-      "Kuku≈ôice na zrno": {
-        "P≈°enice": 0.94,
-        "Jeƒçmen": 0.88,
-        "≈Ωito": 0.91,
-        "Kuku≈ôice na zrno": 1.0
+      "Kuku¯ice na zrno": {
+        "Pöenice": 0.94,
+        "JeËmen": 0.88,
+        "éito": 0.91,
+        "Kuku¯ice na zrno": 1.0
       }
     },
     "psenice_jecmen_chyby_vs_scenare": [
       0.931,
       0.934
     ],
-    "prumerna_korelace_chyb_cen": 0.17640551199389382,
-    "prumerna_korelace_chyb_vynosu": 0.15263426215074685
+    "prumerna_korelace_chyb_cen": 0.1764055119938938,
+    "prumerna_korelace_chyb_vynosu": 0.15263426215075265
   },
   "predikce_info": {
     "model_cen": "kombinace",
@@ -396,7 +411,7 @@
       "roky_se_ztratou": 0,
       "soucet": 402.46
     },
-    "max. oƒçek√°v√°n√≠ (lambda 0)": {
+    "max. oËek·v·nÌ (lambda 0)": {
       "prumer": 27.65,
       "median": 21.07,
       "smer_odch": 19.16,
@@ -404,7 +419,7 @@
       "roky_se_ztratou": 1,
       "soucet": 387.08
     },
-    "mean-CVaR, v√Ωnosy prumer3": {
+    "mean-CVaR, v˝nosy prumer3": {
       "prumer": 27.16,
       "median": 23.12,
       "smer_odch": 14.68,
@@ -420,7 +435,7 @@
       "roky_se_ztratou": 0,
       "soucet": 359.84
     },
-    "rovnomƒõrnƒõ poln√≠ plodiny": {
+    "rovnomÏrnÏ polnÌ plodiny": {
       "prumer": 11.27,
       "median": 10.45,
       "smer_odch": 5.58,
@@ -428,7 +443,7 @@
       "roky_se_ztratou": 0,
       "soucet": 157.78
     },
-    "naivn√≠: lo≈àsk√© mar≈æe": {
+    "naivnÌ: loÚskÈ marûe": {
       "prumer": 2.78,
       "median": 18.54,
       "smer_odch": 44.08,
@@ -438,7 +453,7 @@
     }
   },
   "citlivost_riziko": {
-    "hlavn√≠ (vyhlazen√Ω bootstrap)": {
+    "hlavnÌ (vyhlazen˝ bootstrap)": {
       "ocekavany_zisk": 44586793.44,
       "median": 36344670.286,
       "smer_odchylka": 42800997.56,
@@ -448,17 +463,17 @@
       "p_ztraty": 0.065,
       "prumerna_marze_salat": 336958.66
     },
-    "bez vyhlazen√≠": {
+    "bez vyhlazenÌ": {
       "ocekavany_zisk": 47407629.96,
       "median": 35643716.609,
       "smer_odchylka": 50221960.39,
       "semismer_odchylka": 26007688.36,
       "VaR10": 890756.684,
-      "CVaR10": 547431.113,
+      "CVaR10": 564397.784,
       "p_ztraty": 0.044,
       "prumerna_marze_salat": 340037.48
     },
-    "v√Ωnosy prumer3": {
+    "v˝nosy prumer3": {
       "ocekavany_zisk": 28348904.245,
       "median": 26158341.423,
       "smer_odchylka": 18325529.756,
@@ -468,13 +483,13 @@
       "p_ztraty": 0.028,
       "prumerna_marze_salat": -1303.271
     },
-    "v√Ωnosy prumer3, bez vyhlazen√≠": {
+    "v˝nosy prumer3, bez vyhlazenÌ": {
       "ocekavany_zisk": 26404048.75,
       "median": 22079290.784,
       "smer_odchylka": 19340777.588,
       "semismer_odchylka": 11088745.909,
       "VaR10": 7252003.531,
-      "CVaR10": 6395233.73,
+      "CVaR10": 6602850.096,
       "p_ztraty": 0.0,
       "prumerna_marze_salat": 1220.556
     }

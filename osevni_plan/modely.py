@@ -12,6 +12,7 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 from scipy import stats
+from statsmodels.tsa.arima.model import ARIMA
 
 from data import KODY, PODSKUPINY, Data
 
@@ -262,6 +263,20 @@ def vynos_kombinace(k: Kontext, T: int) -> pd.Series:
     return 0.5 * vynos_trend15(k, T) + 0.5 * vynos_prumer5(k, T)
 
 
+def vynos_arima(k: Kontext, T: int) -> pd.Series:
+    """ARIMA(1,1,0) s lineárním trendem odhadnuté zvlášť pro každou plodinu."""
+    out = {}
+    for kod in KODY:
+        s = k.ly[kod].dropna()
+        try:
+            model = ARIMA(s, order=(1, 1, 0), trend="t").fit()
+            pred = model.forecast(steps=1).iloc[0]
+            out[kod] = float(pred) if np.isfinite(pred) else float(s.iloc[-1])
+        except (ValueError, np.linalg.LinAlgError):
+            out[kod] = float(s.iloc[-1])
+    return pd.Series(out)
+
+
 MODELY_VYNOSU = {
     "naivni": vynos_naivni,
     "prumer3": vynos_prumer3,
@@ -271,4 +286,5 @@ MODELY_VYNOSU = {
     "trend15_robustni": vynos_trend15_robustni,
     "trend15_pocasi": vynos_trend_pocasi,
     "kombinace": vynos_kombinace,
+    "arima": vynos_arima,
 }
