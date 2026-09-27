@@ -13,7 +13,14 @@ MAX_PLOCHA_POLE = 30.0
 MEZ_POLE = 2.0
 
 
-def optimalizuj(marze: np.ndarray, om: Omezeni, lam: float = LAMBDA, alfa: float = ALFA):
+def optimalizuj(
+    marze: np.ndarray,
+    om: Omezeni,
+    lam: float = LAMBDA,
+    alfa: float = ALFA,
+    max_plocha_pole: float = MAX_PLOCHA_POLE,
+    mez_pole: float = MEZ_POLE,
+):
     """Vrací agregované hektary a detail polí pro samostatnou pole-analýzu."""
     scenaru, n = marze.shape
     M = marze / 1e6
@@ -27,11 +34,11 @@ def optimalizuj(marze: np.ndarray, om: Omezeni, lam: float = LAMBDA, alfa: float
         sparse.csr_matrix((1, n + 1 + scenaru)),
     ])
     fyzicka = sparse.hstack([
-        sparse.csr_matrix(np.ones((1, n))), sparse.csr_matrix(np.full((1, n), MEZ_POLE)),
+        sparse.csr_matrix(np.ones((1, n))), sparse.csr_matrix(np.full((1, n), mez_pole)),
         sparse.csr_matrix((1, 1 + scenaru)),
     ])
     vazba = sparse.hstack([
-        sparse.identity(n), -MAX_PLOCHA_POLE * sparse.identity(n),
+        sparse.identity(n), -max_plocha_pole * sparse.identity(n),
         sparse.csr_matrix((n, 1 + scenaru)),
     ])
     A = sparse.vstack([scen, zelenina, fyzicka, vazba]).tocsr()
@@ -45,7 +52,7 @@ def optimalizuj(marze: np.ndarray, om: Omezeni, lam: float = LAMBDA, alfa: float
     integrality = np.concatenate([np.zeros(n), np.ones(n), np.zeros(1 + scenaru)])
     lower_bounds = np.zeros(len(c))
     upper_bounds = np.concatenate([
-        om.horni, np.full(n, ROZLOHA / MEZ_POLE), [np.inf], np.full(scenaru, np.inf),
+        om.horni, np.full(n, ROZLOHA / mez_pole), [np.inf], np.full(scenaru, np.inf),
     ])
     res = milp(
         c,
@@ -65,7 +72,7 @@ def optimalizuj(marze: np.ndarray, om: Omezeni, lam: float = LAMBDA, alfa: float
     for i, kod in enumerate(KODY):
         zbyva = x[i]
         for poradi in range(pocet_poli[i]):
-            plocha = min(MAX_PLOCHA_POLE, zbyva)
+            plocha = min(max_plocha_pole, zbyva)
             if plocha > 1e-6:
                 globalni_pole += 1
                 radky.append({
@@ -73,8 +80,8 @@ def optimalizuj(marze: np.ndarray, om: Omezeni, lam: float = LAMBDA, alfa: float
                     "kod": kod,
                     "poradi_plodiny": poradi + 1,
                     "ha": plocha,
-                    "mez_ha": MEZ_POLE,
-                    "fyzicka_ha": plocha + MEZ_POLE,
+                    "mez_ha": mez_pole,
+                    "fyzicka_ha": plocha + mez_pole,
                 })
             zbyva -= plocha
     return x, pd.DataFrame(radky)

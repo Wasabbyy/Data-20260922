@@ -29,4 +29,12 @@ Zachována zůstávají ostatní omezení hlavního modelu: maximálně 200 ha z
 
 - `vystupy_pole/plan_pole_2025.csv`: agregované hektary podle plodiny a lambda,
 - `vystupy_pole/detaily/plan_pole_2025_detail.csv`: konkrétní pole, plodina, produkční plocha a mez,
-- `vystupy_pole/detaily/riziko_pole_2025.csv`: rizikové ukazatele.
+- `vystupy_pole/detaily/riziko_pole_2025.csv`: rizikové ukazatele na nezávislých testovacích scénářích,
+- `vystupy_pole/detaily/citlivost_predpokladu_pole.csv`: citlivost na velikost polí a výměru mezí,
+- `vystupy_pole/detaily/citlivost_plodiny_pole.csv`: skladba plodin v citlivostních scénářích,
+- `vystupy_pole/detaily/backtest_ceny_souhrn.csv` a `backtest_vynosy_souhrn.csv`: bodové i pravděpodobnostní metriky kandidátních modelů,
+- `vystupy_pole/detaily/testy_diebold_mariano.json`: párové testy rozdílu predikční úspěšnosti,
+- `vystupy_pole/detaily/vztah_chyb_cena_vynos.csv`: korelace chyb predikce ceny a výnosu téže plodiny,
+- `vystupy_pole/metodika_behu.json`: verze Pythonu/knihoven, seed, datový horizont a zvolené modely.
+
+Mapování výsledků na požadavky kurzu a kritické posouzení jsou v `HODNOCENI_KRITERII.md`.

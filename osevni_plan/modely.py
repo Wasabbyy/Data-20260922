@@ -268,6 +268,7 @@ def vynos_arima(k: Kontext, T: int) -> pd.Series:
     out = {}
     for kod in KODY:
         s = k.ly[kod].dropna()
+        s.index = pd.PeriodIndex(s.index.astype(str), freq="Y")
         try:
             model = ARIMA(s, order=(1, 1, 0), trend="t").fit()
             pred = model.forecast(steps=1).iloc[0]

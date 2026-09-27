@@ -47,6 +47,8 @@ def test_arima_vynos_finite(data):
     pred = md.vynos_arima(K.do(2015), 2015)
     assert pred.index.tolist() == dt.KODY
     assert np.isfinite(pred.to_numpy()).all()
+    naive = md.vynos_naivni(K.do(2015), 2015)
+    assert not np.allclose(pred.to_numpy(), naive.to_numpy())
 
 
 def test_crps_bodove_predikce():

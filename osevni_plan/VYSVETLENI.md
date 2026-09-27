@@ -157,12 +157,12 @@ Ceny zemědělských komodit se chovají skoro jako náhodná procházka, a prot
 | trend15 | 0,142 | +0,005 | 0,112 | 0,873 | 83 % | 91 % |
 | trend15_pocasi | 0,142 | +0,005 | 0,112 | 0,873 | 82 % | 92 % |
 | trend15_robustni | 0,149 | −0,001 | 0,117 | 0,910 | 82 % | 92 % |
-| arima | 0,154 | +0,007 | 0,120 | 0,943 | 84 % | 91 % |
+| arima | 0,154 | +0,007 | 0,121 | 0,943 | 83 % | 91 % |
 | naivni | 0,164 | +0,026 | 0,128 | 1,000 | 80 % | 91 % |
 
 U výnosů se naivka porazit dá: výnos je z velké části náhodné počasí, takže „letošek“ je špatný odhad. Nejlepší tři modely jsou prakticky stejně dobré: kombinace má nejnižší MAE, tříletý průměr nejnižší CRPS. Rozdíly mezi nimi nejsou statisticky významné (kombinace vs. prumer3: p = 0,42 v CRPS, p = 0,50 v MAE). Podle pravidla z oddílu 4.3 vychází kombinace. Tříletý průměr ale držíme jako rovnocenného kandidáta a v oddílech 7 a 8 ukazujeme, co by jeho volba změnila.
 
-ARIMA(1,1,0) s lineárním trendem je lepší než naivní predikce (MAE 0,154, CRPS 0,120), ale horší než průměr posledních tří let i kombinace. Přidáváme ji proto jako ověřený srovnávací model, ne jako kandidáta pro finální plán. U krátkých ročních řad jsou odhady ARIMA citlivé a zlepšení proti naivnímu modelu samo o sobě není průkazné (viz `vynosy_arima_vs_naivni` ve výstupu JSON).
+ARIMA(1,1,0) s lineárním trendem je lepší než naivní predikce (MAE 0,154, CRPS 0,121), ale horší než průměr posledních tří let i kombinace. Rozdíl CRPS proti naivnímu modelu není průkazný (Diebold–Mariano p = 0,109). Přidáváme ji proto jako ověřený srovnávací model, ne jako kandidáta pro finální plán. U krátkých ročních řad jsou odhady citlivé; podrobné testy aktuálního běhu jsou v `osevni_plan_pole/vystupy_pole/detaily/testy_diebold_mariano.json`.
 
 **Kalibrace:** 80% intervaly pokryjí 81–83 % případů, 95% intervaly jen 91 %. Na krajích jsou intervaly tedy mírně úzké: rok horší než nejhorší rok v historii chyb scénáře neobsahují. Graf `vystupy/detaily/graf_kalibrace_pit.png` ukazuje PIT histogram: kdyby bylo rozdělení ideální, sloupce by byly stejně vysoké.
 
