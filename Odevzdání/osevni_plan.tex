@@ -1,0 +1,78 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper,top=1.35cm,bottom=1.35cm,left=1.7cm,right=1.7cm]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=1pt}
+
+\begin{document}
+
+
+\begin{center}
+    {\Large\textbf{Executive Summary}}\\[1pt]
+    {\normalsize Návrh osevního plánu pro rok 2025}
+\end{center}
+
+\begin{center}
+    \textbf{Tým B} -- Vanessa Bergová, Daniel Garba, Aneta Lipová, Petr Lupínek, Filip Stupár
+\end{center}
+
+\vspace{-0.2cm}
+
+\section*{1. Nejdůležitější dosažené výsledky}
+
+Pro modelovou farmu o rozloze 1\,000 ha byl vytvořen osevní plán pro rok
+2025 na základě predikovaných cen, výnosů a jejich nejistoty. Výsledný plán
+je tvořen především 250 ha řepky, 250 ha kukuřice, 226 ha ječmene a
+74 ha brambor. Ze zbývající plochy připadá 78 ha na zelený
+česnek, 77 ha na zelí a 45 ha na salát a čekanku. Očekávaný zisk činí přibližně 44{,}6 mil. Kč a pravděpodobnost ztráty je 7\,\%.
+
+Testování na minulých datech za roky 2011--2024 ukázalo, že tento přístup dosáhl průměrného zisku 28{,}8 mil. Kč ročně a v testovaném období nevykázal
+ztrátový rok. Výsledky zároveň ukazují, že stabilní část plánu tvoří
+především řepka, ječmen a kukuřice, zatímco skladba zbývajících plodin je citlivější na volbu modelu výnosů.
+
+\vspace{-0.2cm}
+
+\section*{2. Klíčové použité metody}
+
+Řešení propojuje predikci cen a hektarových výnosů 20 plodin s optimalizací osevního plánu. Predikce vycházejí z dat do roku 2024 a modelují nejistotu pomocí 5\,000 simulovaných scénářů.
+
+Pro ceny a výnosy byla otestována řada přístupů (od naivních predikcí a trendů po autoregresní a meteorologické modely). Na základě historického zpětného testování byla finálně zvolena kombinace naivní predikce a autoregresního modelu u cen a kombinace trendu s pětiletým průměrem u výnosů.
+
+Nejistota byla odhadnuta z historických predikčních chyb při zachování vzájemných vazeb mezi plodinami. Následná optimalizace (model mean--CVaR) hledala plán vyvažující očekávaný zisk a riziko nepříznivých výkyvů. Jako doplňková varianta bylo ověřeno také rozdělení produkce do konkrétních polí se zohledněním jejich velikosti a mezí.
+
+
+\vspace{-0.2cm}
+
+\section*{3. Doporučený další postup}
+
+V rámci dalšího rozpracování projektu je vhodné prověřit citlivost výsledného osevního plánu na ochotu podstupovat riziko a porovnat tak různé úrovně důrazu na očekávaný výsledek. Zároveň lze dále rozšířit analýzu o farmově specifické údaje o výnosech a nákladech a podrobnější meteorologická data. Doplňkové rozšíření o dělení polí umožňuje posoudit, zda je agregovaný osevní plán realizovatelný i při zohlednění velikosti jednotlivých polí a jejich mezí.
+
+\vspace{-0.2cm}
+
+\section*{4. Možné limity řešení}
+
+Nejistota výsledků vyplývá především z omezené délky historických dat a z
+toho, že výnosy jsou založeny na údajích za celou ČR, nikoliv za konkrétní
+farmu. Skutečné riziko farmy proto může být vyšší. Náklady pro rok 2025
+jsou odvozeny z roku 2024 pomocí inflace a jejich vlastní nejistota není
+modelována.
+
+Citlivostní analýza ukázala významný vliv volby modelu výnosů na skladbu
+zeleniny. U některých plodin mohou být výsledky ovlivněny strukturálními
+změnami v datech. Výsledky je proto vhodné interpretovat jako podporu rozhodování, nikoliv jako přesnou předpověď budoucího hospodářského výsledku.
+
+\vspace{-0.2cm}
+
+\section*{5. Otázky na zadavatele}
+
+Dává v reálném provozu farmy smysl uvažovat vyčlenění ploch na polní meze (cesty, okraje), případně v jakém rozsahu?
+
+\end{document}
