@@ -12,12 +12,12 @@ import numpy as np
 import pandas as pd
 
 def _najdi_data() -> Path:
-    """Data leží v kořeni repozitáře (o složku výš). Lokálně případně ve složce Data-20260922."""
+    """Data leží ve složce data/ v kořeni repozitáře. Starší rozložení (kořen, Data-20260922) se zkouší také."""
     koren = Path(__file__).resolve().parent.parent
-    for kandidat in (koren, koren / "Data-20260922"):
+    for kandidat in (koren / "data", koren, koren / "Data-20260922"):
         if (kandidat / "plodiny.xlsx").exists():
             return kandidat
-    raise FileNotFoundError("Nenalezen plodiny.xlsx v kořeni repozitáře")
+    raise FileNotFoundError("Nenalezen plodiny.xlsx ve složce data/ v kořeni repozitáře")
 
 
 DATA_DIR = _najdi_data()

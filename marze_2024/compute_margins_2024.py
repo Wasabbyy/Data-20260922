@@ -19,6 +19,7 @@ import pandas as pd
 
 
 BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR.parent / "data"   # vstupní data jsou ve složce data/ v kořeni repozitáře
 
 
 def normalize_crop_name(value: str) -> str:
@@ -34,7 +35,7 @@ def normalize_crop_name(value: str) -> str:
 
 
 def load_crop_costs() -> pd.DataFrame:
-    excel_path = BASE_DIR / "plodiny.xlsx"
+    excel_path = DATA_DIR / "plodiny.xlsx"
     df = pd.read_excel(excel_path, sheet_name="List1")
     required = ["Anglický název", "Referenční náklady (Kč/ha)"]
     missing = [c for c in required if c not in df.columns]
@@ -48,7 +49,7 @@ def load_crop_costs() -> pd.DataFrame:
 
 
 def load_price_lookup() -> pd.DataFrame:
-    df = pd.read_csv(BASE_DIR / "plodiny_ceny.csv")
+    df = pd.read_csv(DATA_DIR / "plodiny_ceny.csv")
     if "Year" not in df.columns or "Item" not in df.columns or "Value" not in df.columns:
         raise ValueError("Price CSV missing required columns: Year, Item, Value")
 
@@ -60,7 +61,7 @@ def load_price_lookup() -> pd.DataFrame:
 
 
 def load_yield_lookup() -> pd.DataFrame:
-    df = pd.read_csv(BASE_DIR / "plodiny_vynosy.csv")
+    df = pd.read_csv(DATA_DIR / "plodiny_vynosy.csv")
     if "Year" not in df.columns or "Item" not in df.columns or "Element" not in df.columns or "Value" not in df.columns:
         raise ValueError("Yield CSV missing required columns: Year, Item, Element, Value")
 

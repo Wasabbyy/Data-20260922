@@ -2,7 +2,9 @@
 
 Tenhle dokument podrobně vysvětluje řešení ve složce `osevni_plan/`. Všechna čísla pochází z běhu `python3 osevni_plan/spust.py`. Hlavní tabulky a grafy jsou ve `vystupy/`, podpůrné ve `vystupy/detaily/`. Stručný přehled je v `README.md` v kořeni repozitáře.
 
-Executive summary zatím nepíšu. Až skupina projde předpoklady níže, dá se z posledního oddílu udělat.
+Tento dokument popisuje **první část projektu** (původní zadání, `zadani/osevni_plan_1.pdf`): predikci cen a výnosů a původní osevní plán. Executive summary k ní je ve složce `Odevzdání/`.
+
+**Druhá část** (doplnění zadání z `zadani/osevni_plan_2.pdf`: nejisté náklady, nejistý limit zeleniny a nejistý rozpočet) je v samostatném dokumentu [`DOPLNENI_ZADANI.md`](DOPLNENI_ZADANI.md). Ten končí odolným plánem, který doporučujeme po doplnění. Podklady pro executive summary k doplnění jsou v [`PODKLADY_EXECUTIVE_SUMMARY.md`](../PODKLADY_EXECUTIVE_SUMMARY.md).
 
 ---
 
@@ -219,7 +221,7 @@ $\lambda$ je averze k riziku: $\lambda = 0$ maximalizuje jen očekávání, $\la
 | Omezení | Hodnota | Zdroj |
 |---|---|---|
 | celková výměra | $\sum x_i = 1\,000$ ha | zadání |
-| zelenina | $\le 200$ ha | zadání (20 %) |
+| zelenina | $\le 200$ ha | zadání (20 %). Po doplnění zadání je limit parametr, viz `DOPLNENI_ZADANI.md`, oddíl 2 |
 | jedna plodina | $\le 250$ ha | zadání uvádí maximální zastoupení jedné plodiny jako příklad realistického omezení |
 
 Optimalizujeme na 5 000 scénářích a riziko plánu měříme na **jiných** 5 000 scénářích (jiný seed). Jinak by výsledky vyšly příliš optimisticky, protože optimalizace se „naučí“ konkrétní vylosované scénáře.
@@ -274,7 +276,7 @@ Plán s $\lambda = 0{,}5$ při změně modelu výnosů a způsobu tvorby scéná
 | Cibule a šalotka | 0 | 0 | 106 | 80 |
 | Okurky | 0 | 0 | 10 | 5 |
 | **očekávaný zisk (mil. Kč)** | 44,6 | 47,4 | 28,4 | 26,4 |
-| **CVaR 10 % (mil. Kč)** | −3,4 | 0,6 | 1,7 | 6,4 |
+| **CVaR 10 % (mil. Kč)** | −3,4 | 0,4 | 1,7 | 6,1 |
 | **průměrná marže salátu (tis. Kč/ha)** | ≈ 330 | ≈ 330 | ≈ 0 | ≈ 0 |
 
 Co z toho plyne:
@@ -318,7 +320,7 @@ Co z toho plyne:
 
 ## 9. Předpoklady a omezení (projít se skupinou)
 
-1. **Náklady 2025** = náklady 2024 × (1 + inflace 2024) = × 1,024. Nejistotu nákladů nemodelujeme.
+1. **Náklady 2025** = náklady 2024 × (1 + inflace 2024) = × 1,024. V této části nejistotu nákladů nemodelujeme, řeší ji `DOPLNENI_ZADANI.md`.
 2. **Národní výnos místo farmového.** Data jsou za celou ČR, jednotlivá farma má rozptyl výnosu větší. Riziko je tedy spíš podhodnocené.
 3. **Očekávaná inflace** = poslední známá inflace. V roce 2022 (15 %) by to byl špatný odhad, pro rok 2025 (2,4 %) je rozumný.
 4. **Cena nezávisí na tom, kolik farma vyprodukuje.** Model předpokládá, že farma je pro trh malá.
@@ -330,6 +332,8 @@ Co z toho plyne:
 ---
 
 ## 10. Návrh hlavních závěrů (pro budoucí executive summary)
+
+Závěry níže platí pro původní zadání. Závěry po doplnění zadání jsou v `DOPLNENI_ZADANI.md`, oddíl 7.
 
 - Ceny plodin jsou skoro nepředvídatelné: nejlepší model (průměr naivní predikce a návratu reálné ceny k průměru) je jen o 5 % lepší než „příští rok jako letos“. Výnosy predikovat jde lépe (o 16–18 %).
 - Roční meteorologická a makroekonomická data predikci nezlepšila, a to ani kdybychom počasí znali dopředu.
@@ -355,12 +359,13 @@ Co z toho plyne:
 
 | Soubor | Obsah |
 |---|---|
-| `data.py` | načtení dat z kořene repozitáře, ořez na ≤ 2024, marže 2024 |
-| `modely.py` | 6 modelů cen, 8 modelů výnosů |
+| `data.py` | načtení dat ze složky `data/`, ořez na ≤ 2024, marže 2024 |
+| `modely.py` | 6 modelů cen, 9 modelů výnosů (včetně ARIMA) |
 | `backtest.py` | rolující backtest, vyhlazený bootstrap scénářů, CRPS, pokrytí, pravidlo výběru, DM test |
-| `optimalizace.py` | mean-CVaR lineární program a omezení |
-| `spust.py` | celý řetězec, citlivostní analýza, tabulky a grafy |
-| `test_reseni.py` | 9 testů (únik informací, marže, LP, bootstrap, regrese počasí) |
+| `optimalizace.py` | mean-CVaR lineární program, omezení (limit zeleniny, rozpočet), stínové ceny, plán s nejmenší největší lítostí |
+| `naklady_rozpocet.py` | doplnění zadání: scénáře nákladů, limit zeleniny, rozpočet, odolný plán, stabilita |
+| `spust.py` | celý řetězec včetně doplnění zadání, citlivostní analýza, tabulky a grafy |
+| `test_reseni.py` | 20 testů (únik informací, marže, ARIMA, LP, bootstrap, regrese počasí, rozpočet, scénáře nákladů, čísla v textu) |
 
 Spuštění:
 ```bash

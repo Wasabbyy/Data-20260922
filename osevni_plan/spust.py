@@ -1,8 +1,10 @@
-"""Celý řetězec: marže 2024 -> backtest modelů -> scénáře 2025 -> osevní plán -> rozhodovací backtest.
+"""Celý řetězec: marže 2024 -> backtest modelů -> scénáře 2025 -> osevní plán -> rozhodovací backtest
+-> doplnění zadání (nejisté náklady, limit zeleniny, rozpočet).
 
 Spuštění:  python3 osevni_plan/spust.py
 Výstupy:   osevni_plan/vystupy/        hlavní tabulky a grafy
            osevni_plan/vystupy/detaily/ podpůrné tabulky
+           osevni_plan/vystupy/doplneni/ doplnění zadání (náklady, limit zeleniny, rozpočet)
 """
 from __future__ import annotations
 
@@ -19,12 +21,15 @@ import pandas as pd
 import backtest as bt
 import data as dt
 import modely as md
+import naklady_rozpocet as nr
 import optimalizace as op
 
 warnings.simplefilter("ignore")
 OUT = Path(__file__).resolve().parent / "vystupy"
 DET = OUT / "detaily"
 DET.mkdir(parents=True, exist_ok=True)
+DOP = OUT / "doplneni"
+DOP.mkdir(parents=True, exist_ok=True)
 
 ALTERNATIVNI_MODEL_VYNOSU = "prumer3"   # nejlepší CRPS, kandidát pro citlivostní analýzu
 N_SCENARU = 5000
@@ -383,38 +388,129 @@ def graf_rozhodovaci(piv):
     plt.close(fig)
 
 
+def _teplotni_mapa(ax, tab, titulek, xlabel, ylabel=None):
+    """Tabulka čísel podbarvená jedním odstínem (víc = tmavší)."""
+    hodnoty = tab.to_numpy(float)
+    ax.imshow(hodnoty, cmap="Blues", vmin=0, vmax=max(hodnoty.max(), 1) * 1.35, aspect="auto")
+    ax.set_xticks(range(tab.shape[1]), tab.columns)
+    ax.set_yticks(range(tab.shape[0]), tab.index)
+    for i in range(tab.shape[0]):
+        for j in range(tab.shape[1]):
+            if hodnoty[i, j] > 0.5:
+                ax.text(j, i, f"{hodnoty[i, j]:.0f}", ha="center", va="center", fontsize=8, color=INK)
+    ax.set_title(titulek, loc="left", color=INK, fontsize=11)
+    ax.set_xlabel(xlabel)
+    if ylabel:
+        ax.set_ylabel(ylabel)
+    ax.grid(visible=False)
+    for strana in ax.spines.values():
+        strana.set_visible(False)
+    ax.tick_params(length=0)
+
+
+def graf_naklady(cit, cit_plany, nasobky):
+    fig, osy = plt.subplots(1, 2, figsize=(14, 5.2), gridspec_kw={"width_ratios": [1, 1.25]})
+    ax = osy[0]
+    for sloupec, barva, styl, popis in [
+        ("puvodni_E", MODRA, "-", "původní plán: očekávaný zisk"),
+        ("puvodni_CVaR", MODRA, "--", "původní plán: CVaR 10 %"),
+        ("prepocitany_E", ORANZOVA, "-", "přepočítaný plán: očekávaný zisk"),
+        ("prepocitany_CVaR", ORANZOVA, "--", "přepočítaný plán: CVaR 10 %"),
+    ]:
+        ax.plot(cit.index, cit[sloupec] / 1e6, color=barva, ls=styl, lw=2, label=popis)
+    ax.axhline(0, color=INK2, lw=0.8)
+    horni = ax.get_ylim()[1]
+    for nazev, k in nasobky.items():
+        if k > 1:
+            ax.axvline(k, color=SEDA, lw=1, ls=":")
+            ax.text(k, horni, nazev.split(" (")[0].replace("růst jako ", ""), rotation=90, va="top", ha="right",
+                    fontsize=8, color=INK2)
+    ax.xaxis.set_major_formatter(lambda v, _: nr.cz(v))
+    ax.set_xlabel("násobek nákladů k vůči základu (tečkovaně: růst nákladů jako v daném roce)")
+    ax.set_ylabel("mil. Kč")
+    ax.set_title("Zisk farmy podle výše nákladů", loc="left", color=INK, fontsize=11)
+    ax.legend(frameon=False, fontsize=9, loc="lower left")
+    tab = cit_plany.copy()
+    tab.columns = [c.replace("k = ", "") for c in tab.columns]
+    _teplotni_mapa(osy[1], tab, "Přepočítaný plán podle výše nákladů (ha)", "násobek nákladů k")
+    fig.tight_layout()
+    fig.savefig(DOP / "graf_naklady.png")
+    plt.close(fig)
+
+
+def graf_limit_rozpocet(lim, roz, naklady_planu):
+    fig, osy = plt.subplots(1, 2, figsize=(12, 4.4), sharey=True)
+    zakl = roz[(roz["varianta"] == "základní náklady") & roz["pripustne"]].set_index("rozpocet_mil")
+    for ax, tab, titulek, xlabel, zadani in [
+        (osy[0], lim, "Limit zeleniny", "limit zeleniny (ha), v zadání 200 ha", 200),
+        (osy[1], zakl, "Rozpočet", f"rozpočet na náklady (mil. Kč), původní plán stojí {naklady_planu / 1e6:.0f} mil. Kč", None),
+    ]:
+        ax.plot(tab.index, tab["E"] / 1e6, "-o", color=MODRA, lw=2, ms=5, label="očekávaný zisk")
+        ax.plot(tab.index, tab["CVaR"] / 1e6, "--o", color=ORANZOVA, lw=2, ms=5, label="CVaR 10 %")
+        ax.axhline(0, color=INK2, lw=0.8)
+        if zadani is not None:
+            ax.axvline(zadani, color=SEDA, lw=1, ls=":")
+        ax.set_title(f"{titulek}: zisk plánu optimálního pro danou mez", loc="left", color=INK, fontsize=11)
+        ax.set_xlabel(xlabel)
+    osy[0].set_ylabel("mil. Kč")
+    osy[0].legend(frameon=False, fontsize=9, loc="upper left")
+    fig.tight_layout()
+    fig.savefig(DOP / "graf_limit_zeleniny_rozpocet.png")
+    plt.close(fig)
+
+
+def graf_mrizka_nakladu(mrizka):
+    tab = mrizka.pivot(index="k_pole", columns="k_zelenina", values="ha_zelenina").sort_index(ascending=False)
+    tab.index = [nr.cz(k) for k in tab.index]
+    tab.columns = [nr.cz(k) for k in tab.columns]
+    fig, ax = plt.subplots(figsize=(6.4, 4.2))
+    _teplotni_mapa(ax, tab, "Hektary zeleniny v plánu podle chyby odhadu nákladů",
+                   "násobek nákladů zeleniny", "násobek nákladů polních plodin")
+    fig.tight_layout()
+    fig.savefig(DOP / "graf_naklady_pole_zelenina.png")
+    plt.close(fig)
+
+
 # --------------------------------------------------------------------------
 def main():
     data = dt.nacti()
     K = md.Kontext.z_dat(data)
 
-    print("1/5 backtest modelů ...")
+    print("1/6 backtest modelů ...")
     btc, bty, mc, my, sc, sy, dm = krok_backtest(K)
     pocasi = krok_pocasi(K, data)
 
     model_cen, model_vynosu = bt.vyber_modelu(btc, dt.POSLEDNI_ROK), bt.vyber_modelu(bty, dt.POSLEDNI_ROK)
     print(f"   vybrané modely (nejnižší MAE 2003-2024): ceny = {model_cen}, výnosy = {model_vynosu}")
 
-    print("2/5 scénáře 2025 ...")
+    print("2/6 scénáře 2025 ...")
     tab, M, naklady_2025, kor, info, (bod_lp, bod_ly, Ec, Ey) = krok_predikce_2025(
         K, data, btc, bty, model_cen, model_vynosu)
 
-    print("3/5 osevní plán 2025 ...")
+    print("3/6 osevní plán 2025 ...")
     rng = np.random.default_rng(SEED + 1)
     _, _, M_test, _ = scenare_marzi(bod_lp, bod_ly, Ec, Ey, naklady_2025, rng)
     plan, rz, om = krok_plan_2025(data, M, M_test)
     plan_cit, rz_cit = krok_citlivost(K, data, btc, bty, model_cen, model_vynosu, naklady_2025)
 
-    print("4/5 rozhodovací backtest ...")
+    print("4/6 rozhodovací backtest ...")
     piv, souhrn_rb = krok_rozhodovaci_backtest(data, K, btc, bty)
 
-    print("5/5 grafy ...")
+    print("5/6 doplnění zadání: náklady, limit zeleniny, rozpočet ...")
+    C_2025 = naklady_2025.to_numpy()
+    dopl = nr.spust(data, M + C_2025, M_test + C_2025, naklady_2025, op.optimalizuj(M, om), DOP)
+
+    print("6/6 grafy ...")
     graf_backtest(sc, sy)
     graf_kalibrace(mc, my)
     graf_vejire(data, tab, K, btc, bty)
     graf_marze(tab, M)
     graf_plan(plan, rz)
     graf_rozhodovaci(piv)
+    t = dopl["tabulky"]
+    graf_naklady(t["citlivost"], t["citlivost_plany"], dopl["souhrn"]["nasobky_rustu"])
+    graf_limit_rozpocet(t["limit"], t["rozpocet"], dopl["souhrn"]["naklady_planu"])
+    graf_mrizka_nakladu(t["mrizka"])
 
     vysledky = {
         "backtest_ceny": sc.round(4).to_dict(orient="index"),
@@ -426,6 +522,7 @@ def main():
         "plan_riziko": rz.round(3).to_dict(orient="index"),
         "rozhodovaci_backtest": souhrn_rb.round(2).to_dict(orient="index"),
         "citlivost_riziko": rz_cit.round(3).to_dict(orient="index"),
+        "doplneni_zadani": dopl["souhrn"],
     }
     (DET / "vysledky.json").write_text(json.dumps(vysledky, ensure_ascii=False, indent=2, default=float))
 
