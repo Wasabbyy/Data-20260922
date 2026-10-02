@@ -1,0 +1,18 @@
+{
+  "vynosy_kombinace_vs_naivni_crps": [
+    -2.720061928340667,
+    0.017510838584018806
+  ],
+  "vynosy_kombinace_vs_prumer3_crps": [
+    0.8272198112044792,
+    0.423037467446155
+  ],
+  "vynosy_kombinace_vs_prumer3_mae": [
+    -0.6874248587151834,
+    0.5038952578794786
+  ],
+  "vynosy_arima_vs_naivni_crps": [
+    -1.7230470620826501,
+    0.10856615792047042
+  ]
+}

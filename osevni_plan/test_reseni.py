@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import backtest as bt  # noqa: E402
 import data as dt  # noqa: E402
 import modely as md  # noqa: E402
+import naklady_rozpocet as nr  # noqa: E402
 import optimalizace as op  # noqa: E402
 
 
@@ -40,6 +41,15 @@ def test_modely_nevidi_budoucnost(data, modely):
     for nazev, f in modely.items():
         a, b = f(K.do(T), T), f(pokazeny.do(T), T)
         pd.testing.assert_series_equal(a, b, check_names=False, obj=nazev)
+
+
+def test_arima_vynos_finite(data):
+    K = md.Kontext.z_dat(data)
+    pred = md.vynos_arima(K.do(2015), 2015)
+    assert pred.index.tolist() == dt.KODY
+    assert np.isfinite(pred.to_numpy()).all()
+    naive = md.vynos_naivni(K.do(2015), 2015)
+    assert not np.allclose(pred.to_numpy(), naive.to_numpy())
 
 
 def test_crps_bodove_predikce():
@@ -102,3 +112,119 @@ def test_pocasi_je_spolecna_ols(data):
         Y.append(ly[kod].to_numpy())
     beta = np.linalg.lstsq(np.vstack(bloky), np.concatenate(Y), rcond=None)[0]
     assert gamma.loc["0111"].to_numpy() == pytest.approx(beta[-2:], abs=1e-8)
+
+
+# --- doplnění zadání: náklady, limit zeleniny, rozpočet ---------------------
+@pytest.fixture(scope="module")
+def uloha(data):
+    """Malá umělá úloha: tržby rostou s náklady, dražší plodiny jsou výnosnější i rizikovější."""
+    rng = np.random.default_rng(7)
+    C = data.naklady_2024.to_numpy(float)
+    T = C * (1.15 + 0.25 * rng.standard_normal((400, 20)))
+    return T, C, op.omezeni(data.zelenina)
+
+
+def test_nasobek_rustu_nakladu(data):
+    # náklady rostou jako v roce 2022 (15,1 %) místo základních 2,4 %: 1,151 / 1,024 = 1,124
+    assert nr.nasobek_rustu(data.makro, 2022) == pytest.approx(1.151 / 1.024)
+    assert nr.nasobek_rustu(data.makro, 2024) == pytest.approx(1.0)
+    sc = nr.scenare_rustu(data.makro)
+    assert [round(s.k_pole, 3) for s in sc] == [1.0, 1.038, 1.081, 1.124]
+
+
+def test_naklady_scenare_deli_pole_a_zeleninu(data):
+    zel = data.zelenina.reindex(dt.KODY).to_numpy(bool)
+    C = nr.naklady_scenare(np.full(20, 100.0), zel, nr.ScenarNakladu("x", 1.1, 1.3))
+    assert C[0] == pytest.approx(110) and C[-1] == pytest.approx(130)
+
+
+def test_vychozi_omezeni_se_nezmenila(uloha):
+    T, C, om = uloha
+    x = op.optimalizuj(T - C, om)
+    assert x == pytest.approx(op.optimalizuj(T - C, om, max_zelenina=200.0))
+    assert x == pytest.approx(op.vyres(T - C, om, naklady=C, rozpocet=1e12).x, abs=1e-4)
+
+
+def test_rozpocet_se_dodrzi_a_je_aktivni(uloha):
+    T, C, om = uloha
+    bez = op.vyres(T - C, om)
+    B = 0.6 * C @ bez.x
+    r = op.vyres(T - C, om, naklady=C, rozpocet=B)
+    assert C @ r.x == pytest.approx(B, rel=1e-6)          # rozpočet se vyčerpá
+    assert r.x.sum() == pytest.approx(op.ROZLOHA)
+    assert r.stin_rozpocet > 0 and r.hodnota < bez.hodnota
+
+
+def test_rozpocet_pod_minimem_hlasi_chybu(uloha, data):
+    T, C, om = uloha
+    minimum = op.min_rozpocet(C, om)
+    # nejlevnější osetí = 250 ha čtyř nejlevnějších plodin
+    assert minimum == pytest.approx(250 * np.sort(C)[:4].sum())
+    with pytest.raises(ValueError, match="nestačí"):
+        op.vyres(T - C, om, naklady=C, rozpocet=0.99 * minimum)
+    op.vyres(T - C, om, naklady=C, rozpocet=1.01 * minimum)
+
+
+def test_hodnota_optima_je_monotonni(uloha):
+    T, C, om = uloha
+    podle_B = [op.vyres(T - C, om, naklady=C, rozpocet=B * 1e6).hodnota for B in (30, 60, 120, 240)]
+    podle_limitu = [op.vyres(T - C, om, max_zelenina=z).hodnota for z in (0, 100, 200, 400)]
+    podle_k = [op.vyres(T - k * C, om).hodnota for k in (0.8, 1.0, 1.2)]
+    assert np.all(np.diff(podle_B) >= -1e-3) and np.all(np.diff(podle_limitu) >= -1e-3)
+    assert np.all(np.diff(podle_k) <= 1e-3)
+
+
+def test_stinova_cena_odpovida_zmene_hodnoty(uloha):
+    T, C, om = uloha
+    r = op.vyres(T - C, om, max_zelenina=100)
+    o_ha_vic = op.vyres(T - C, om, max_zelenina=101).hodnota - r.hodnota
+    assert r.stin_zelenina == pytest.approx(o_ha_vic, rel=0.05)
+
+
+def test_hodnota_je_ucel_lp(uloha):
+    T, C, om = uloha
+    r = op.vyres(T - C, om)
+    assert op.hodnota((T - C) @ r.x) == pytest.approx(r.hodnota, rel=1e-3)
+
+
+def test_minimax_litost_neni_horsi_nez_plan_pro_jeden_scenar(uloha):
+    T, C, om = uloha
+    marze = [T - k * C for k in (1.0, 1.1, 1.2)]
+    x, nejvetsi = op.minimax_litost(marze, om)
+    assert x.sum() == pytest.approx(op.ROZLOHA) and x[om.zelenina].sum() <= op.MAX_ZELENINA + 1e-6
+
+    def nejvetsi_litost(y):
+        return max(op.vyres(M, om).hodnota - op.hodnota(M @ y) for M in marze)
+
+    assert nejvetsi == pytest.approx(nejvetsi_litost(x), abs=2e3)
+    for M in marze:
+        assert nejvetsi <= nejvetsi_litost(op.optimalizuj(M, om)) + 2e3
+
+
+def test_cisla_v_textu_odpovidaji_vystupum():
+    """DOPLNENI_ZADANI.md musí obsahovat čísla z posledního běhu spust.py."""
+    koren = Path(__file__).resolve().parent
+    vysledky = koren / "vystupy" / "detaily" / "vysledky.json"
+    if not vysledky.exists():
+        pytest.skip("nejdřív spusť python3 osevni_plan/spust.py")
+    import json
+    S = json.loads(vysledky.read_text())["doplneni_zadani"]
+    text = (koren / "DOPLNENI_ZADANI.md").read_text()
+
+    def cz(x, mista=1):
+        return nr.cz(x, mista).replace("-", "−")
+
+    ocekavane = [
+        f"1{{,}}151 / 1{{,}}024 = {cz(S['nasobky_rustu']['růst jako 2022 (15,1 %)'], 3)}",
+        f"= {cz(S['min_rozpocet'] / 1e6)}$ mil. Kč",
+        f"Původní plán stojí {cz(S['naklady_planu'] / 1e6)} mil. Kč",
+        f"Stojí {cz(S['naklady_robustniho_planu'] / 1e6)} mil. Kč",
+        f"= {cz(S['k_nulovy_ocekavany_zisk_planu'], 2)}$",
+    ]
+    for nazev, r in S["scenare"].items():
+        for plan in ("puvodni", "prepocitany", "robustni"):
+            ocekavane.append(f"{cz(r[plan + '_E'] / 1e6)} / {cz(r[plan + '_CVaR'] / 1e6)} / {cz(100 * r[plan + '_p_ztraty'])} %")
+    for plodina, ha in S["doporuceny_plan"].items():
+        ocekavane.append(f"{plodina.lower()} {cz(ha, 0)} ha")
+    chybi = [o for o in ocekavane if o not in text]
+    assert not chybi, chybi

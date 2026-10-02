@@ -145,6 +145,17 @@
       "crps_vs_bench": 0.9095,
       "podil_lepsi_nez_bench": 0.5143
     },
+    "arima": {
+      "mae": 0.1536,
+      "bias": 0.0066,
+      "crps": 0.121,
+      "pokryti80": 0.8321,
+      "pokryti95": 0.9143,
+      "is80": 0.8559,
+      "mae_vs_bench": 0.9375,
+      "crps_vs_bench": 0.943,
+      "podil_lepsi_nez_bench": 0.5214
+    },
     "naivni": {
       "mae": 0.1639,
       "bias": 0.0264,
@@ -175,41 +186,45 @@
       0.47031117685742796
     ],
     "vynosy_kombinace_vs_prumer3": [
-      0.82721981120436,
-      0.42303746744622006
+      0.8272198112043596,
+      0.4230374674462203
     ],
     "vynosy_kombinace_vs_prumer3_mae": [
-      -0.6874248587154641,
+      -0.6874248587154642,
       0.5038952578793077
     ],
+    "vynosy_arima_vs_naivni": [
+      -1.7229945684940664,
+      0.10857589435712178
+    ],
     "vynosy_pocasi_vs_trend15": [
-      0.18668569651669834,
-      0.8547889266208479
+      0.18668569651687003,
+      0.8547889266207158
     ]
   },
   "pocasi": {
-    "mae_klimatologie": 0.1419106126781416,
-    "mae_oracle_se_znalosti_pocasi": 0.1448915531829423,
+    "mae_klimatologie": 0.1419106126781417,
+    "mae_oracle_se_znalosti_pocasi": 0.1448915531829424,
     "koeficienty_na_1_sd": {
-      "Řepka": {
-        "srazky": -0.0462,
-        "teplota": -0.0302
-      },
       "Hrách na zrno": {
         "srazky": -0.0357,
         "teplota": -0.017
       },
-      "Pšenice": {
-        "srazky": -0.0098,
-        "teplota": 0.0129
-      },
       "Zelí": {
         "srazky": 0.0287,
         "teplota": 0.0395
+      },
+      "Řepka": {
+        "srazky": -0.0462,
+        "teplota": -0.0302
+      },
+      "Pšenice": {
+        "srazky": -0.0098,
+        "teplota": 0.0129
       }
     },
     "sd_srazky_mm": 93.95873663533335,
-    "sd_teplota_c": 0.9546547308017992
+    "sd_teplota_c": 0.9546547308017991
   },
   "korelace": {
     "cena_vynos_stejna_plodina": {
@@ -454,7 +469,7 @@
       "smer_odchylka": 50221960.39,
       "semismer_odchylka": 26007688.36,
       "VaR10": 890756.684,
-      "CVaR10": 547431.113,
+      "CVaR10": 441686.838,
       "p_ztraty": 0.044,
       "prumerna_marze_salat": 340037.48
     },
@@ -474,9 +489,583 @@
       "smer_odchylka": 19340777.588,
       "semismer_odchylka": 11088745.909,
       "VaR10": 7252003.531,
-      "CVaR10": 6395233.73,
+      "CVaR10": 6067947.666,
       "p_ztraty": 0.0,
       "prumerna_marze_salat": 1220.556
     }
+  },
+  "doplneni_zadani": {
+    "nasobky_rustu": {
+      "základ (růst 2,4 %)": 1.0,
+      "růst jako 2008 (6,3 %)": 1.0381,
+      "růst jako 2023 (10,7 %)": 1.0811,
+      "růst jako 2022 (15,1 %)": 1.124
+    },
+    "k_nulovy_ocekavany_zisk_planu": 1.2842,
+    "trzba_planu_prumer": 201484718.70980263,
+    "naklady_planu": 156897925.2696901,
+    "naklady_planu_zelenina": 119808146.01147461,
+    "naklady_planu_pole": 37089779.25821548,
+    "min_rozpocet": 18688000.000000004,
+    "k_rezerva": 1.124,
+    "naklady_robustniho_planu": 109770389.52736217,
+    "doporuceny_plan": {
+      "Ječmen": 250.0,
+      "Kukuřice na zrno": 250.0,
+      "Řepka": 250.0,
+      "Cukrová řepa": 50.0,
+      "Zelí": 54.1,
+      "Zelený česnek": 30.8,
+      "Salát a čekanka": 26.5,
+      "Cibule a šalotka": 88.6
+    },
+    "doporuceni_podle_limitu": {
+      "100": {
+        "ha_zelenina": 100.0,
+        "naklady_planu": 76714189.825,
+        "naklady_s_rezervou": 86228547.352,
+        "zaklad_E": 24580405.588,
+        "zaklad_CVaR": 2456261.197,
+        "zaklad_p_ztraty": 0.022,
+        "nejvyssi_rust_E": 15066048.061,
+        "nejvyssi_rust_CVaR": -7058096.331,
+        "nejvyssi_rust_p_ztraty": 0.149,
+        "nejvetsi_litost": 675248.163
+      },
+      "150": {
+        "ha_zelenina": 150.0,
+        "naklady_planu": 93213932.136,
+        "naklady_s_rezervou": 104774644.423,
+        "zaklad_E": 30287882.661,
+        "zaklad_CVaR": 2729382.775,
+        "zaklad_p_ztraty": 0.023,
+        "nejvyssi_rust_E": 18727170.375,
+        "nejvyssi_rust_CVaR": -8831329.512,
+        "nejvyssi_rust_p_ztraty": 0.154,
+        "nejvetsi_litost": 928513.65
+      },
+      "200": {
+        "ha_zelenina": 200.0,
+        "naklady_planu": 109770389.527,
+        "naklady_s_rezervou": 123384490.572,
+        "zaklad_E": 35919951.256,
+        "zaklad_CVaR": 2929653.157,
+        "zaklad_p_ztraty": 0.023,
+        "nejvyssi_rust_E": 22305850.211,
+        "nejvyssi_rust_CVaR": -10684447.888,
+        "nejvyssi_rust_p_ztraty": 0.157,
+        "nejvetsi_litost": 1152027.417
+      },
+      "250": {
+        "ha_zelenina": 250.0,
+        "naklady_planu": 126429421.384,
+        "naklady_s_rezervou": 142109632.825,
+        "zaklad_E": 41641352.967,
+        "zaklad_CVaR": 2986029.289,
+        "zaklad_p_ztraty": 0.024,
+        "nejvyssi_rust_E": 25961141.526,
+        "nejvyssi_rust_CVaR": -12694182.152,
+        "nejvyssi_rust_p_ztraty": 0.162,
+        "nejvetsi_litost": 1315545.013
+      },
+      "300": {
+        "ha_zelenina": 300.0,
+        "naklady_planu": 143801911.818,
+        "naklady_s_rezervou": 161636719.24,
+        "zaklad_E": 46958611.725,
+        "zaklad_CVaR": 3292189.515,
+        "zaklad_p_ztraty": 0.024,
+        "nejvyssi_rust_E": 29123804.303,
+        "nejvyssi_rust_CVaR": -14542617.908,
+        "nejvyssi_rust_p_ztraty": 0.167,
+        "nejvetsi_litost": 1517012.657
+      }
+    },
+    "scenare": {
+      "základ (růst 2,4 %)": {
+        "k": 1.0,
+        "puvodni_E": 44586793.44,
+        "puvodni_CVaR": -3433134.194,
+        "puvodni_p_ztraty": 0.065,
+        "puvodni_litost": 0.0,
+        "prepocitany_E": 44586793.44,
+        "prepocitany_CVaR": -3433134.194,
+        "prepocitany_p_ztraty": 0.065,
+        "spolecne_ha_s_puvodnim": 1000.0,
+        "robustni_E": 35919951.256,
+        "robustni_CVaR": 2929653.157,
+        "robustni_p_ztraty": 0.023,
+        "robustni_litost": 1152027.417
+      },
+      "růst jako 2008 (6,3 %)": {
+        "k": 1.038,
+        "puvodni_E": 38611188.864,
+        "puvodni_CVaR": -9408738.77,
+        "puvodni_p_ztraty": 0.114,
+        "puvodni_litost": 671112.181,
+        "prepocitany_E": 32561477.079,
+        "prepocitany_CVaR": -2016802.622,
+        "prepocitany_p_ztraty": 0.061,
+        "spolecne_ha_s_puvodnim": 850.543,
+        "robustni_E": 31739243.061,
+        "robustni_CVaR": -1251055.038,
+        "robustni_p_ztraty": 0.053,
+        "robustni_litost": 28243.217
+      },
+      "růst jako 2023 (10,7 %)": {
+        "k": 1.081,
+        "puvodni_E": 31869481.138,
+        "puvodni_CVaR": -16150446.496,
+        "puvodni_p_ztraty": 0.181,
+        "puvodni_litost": 2810326.786,
+        "prepocitany_E": 25983661.613,
+        "prepocitany_CVaR": -4643973.399,
+        "prepocitany_p_ztraty": 0.086,
+        "spolecne_ha_s_puvodnim": 810.517,
+        "robustni_E": 27022546.636,
+        "robustni_CVaR": -5967751.463,
+        "robustni_p_ztraty": 0.1,
+        "robustni_litost": 142446.521
+      },
+      "růst jako 2022 (15,1 %)": {
+        "k": 1.124,
+        "puvodni_E": 25127773.412,
+        "puvodni_CVaR": -22892154.222,
+        "puvodni_p_ztraty": 0.259,
+        "puvodni_litost": 5651606.305,
+        "prepocitany_E": 20671798.602,
+        "prepocitany_CVaR": -7132966.803,
+        "prepocitany_p_ztraty": 0.121,
+        "spolecne_ha_s_puvodnim": 767.732,
+        "robustni_E": 22305850.211,
+        "robustni_CVaR": -10684447.888,
+        "robustni_p_ztraty": 0.157,
+        "robustni_litost": 958714.739
+      }
+    },
+    "limit_zeleniny": {
+      "0": {
+        "ha_zelenina": 0.0,
+        "E": 11131018.926,
+        "CVaR": -175112.941,
+        "p_ztraty": 0.047,
+        "hodnota": 5477952.993,
+        "naklady_planu": 38924723.904,
+        "stin_kc_za_ha": 507240.783,
+        "spolecne_ha_s_puvodnim": 725.935
+      },
+      "50": {
+        "ha_zelenina": 50.0,
+        "E": 20811144.14,
+        "CVaR": 733356.094,
+        "p_ztraty": 0.033,
+        "hodnota": 10772250.117,
+        "naklady_planu": 75889617.981,
+        "stin_kc_za_ha": 69441.042,
+        "spolecne_ha_s_puvodnim": 742.172
+      },
+      "100": {
+        "ha_zelenina": 100.0,
+        "E": 28819531.625,
+        "CVaR": -432368.513,
+        "p_ztraty": 0.048,
+        "hodnota": 14193581.556,
+        "naklady_planu": 100312267.394,
+        "stin_kc_za_ha": 62905.222,
+        "spolecne_ha_s_puvodnim": 868.119
+      },
+      "150": {
+        "ha_zelenina": 150.0,
+        "E": 36840731.106,
+        "CVaR": -1966438.369,
+        "p_ztraty": 0.058,
+        "hodnota": 17437146.368,
+        "naklady_planu": 128657086.526,
+        "stin_kc_za_ha": 60280.217,
+        "spolecne_ha_s_puvodnim": 935.157
+      },
+      "200": {
+        "ha_zelenina": 200.0,
+        "E": 44586793.44,
+        "CVaR": -3433134.194,
+        "p_ztraty": 0.065,
+        "hodnota": 20576829.623,
+        "naklady_planu": 156897925.27,
+        "stin_kc_za_ha": 58597.855,
+        "spolecne_ha_s_puvodnim": 1000.0
+      },
+      "250": {
+        "ha_zelenina": 250.0,
+        "E": 51725964.43,
+        "CVaR": -4467492.148,
+        "p_ztraty": 0.068,
+        "hodnota": 23629236.141,
+        "naklady_planu": 185178298.82,
+        "stin_kc_za_ha": 57693.732,
+        "spolecne_ha_s_puvodnim": 931.697
+      },
+      "300": {
+        "ha_zelenina": 300.0,
+        "E": 59293229.717,
+        "CVaR": -6008403.163,
+        "p_ztraty": 0.071,
+        "hodnota": 26642413.277,
+        "naklady_planu": 214859166.281,
+        "stin_kc_za_ha": 57010.888,
+        "spolecne_ha_s_puvodnim": 864.162
+      },
+      "350": {
+        "ha_zelenina": 350.0,
+        "E": 66894090.531,
+        "CVaR": -7619991.049,
+        "p_ztraty": 0.074,
+        "hodnota": 29637049.741,
+        "naklady_planu": 244810872.598,
+        "stin_kc_za_ha": 56614.665,
+        "spolecne_ha_s_puvodnim": 795.906
+      },
+      "400": {
+        "ha_zelenina": 400.0,
+        "E": 74300645.955,
+        "CVaR": -9127846.191,
+        "p_ztraty": 0.077,
+        "hodnota": 32586399.882,
+        "naklady_planu": 273378583.241,
+        "stin_kc_za_ha": 56385.536,
+        "spolecne_ha_s_puvodnim": 732.771
+      }
+    },
+    "rozpocet": [
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 25,
+        "pripustne": true,
+        "ha_zelenina": 10.9212,
+        "E": 9541190.6884,
+        "CVaR": -77130.3284,
+        "p_ztraty": 0.0434,
+        "naklady_planu": 25000000.0,
+        "naklady_pri_k_rozpoctu": 25000000.0,
+        "cena_opatrnosti": 15844799.4432,
+        "stin_kc_za_kc": 0.2723,
+        "spolecne_ha_s_puvodnim": 549.4438
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 30,
+        "pripustne": true,
+        "ha_zelenina": 31.1849,
+        "E": 11303547.4011,
+        "CVaR": 711105.8403,
+        "p_ztraty": 0.0286,
+        "naklady_planu": 30000000.0,
+        "naklady_pri_k_rozpoctu": 30000000.0,
+        "cena_opatrnosti": 14569503.0024,
+        "stin_kc_za_kc": 0.2269,
+        "spolecne_ha_s_puvodnim": 525.1419
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 40,
+        "pripustne": true,
+        "ha_zelenina": 71.9788,
+        "E": 15343118.962,
+        "CVaR": 1317209.4224,
+        "p_ztraty": 0.0238,
+        "naklady_planu": 40000000.0,
+        "naklady_pri_k_rozpoctu": 40000000.0,
+        "cena_opatrnosti": 12246665.4309,
+        "stin_kc_za_kc": 0.2132,
+        "spolecne_ha_s_puvodnim": 507.5338
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 50,
+        "pripustne": true,
+        "ha_zelenina": 110.4609,
+        "E": 19282265.665,
+        "CVaR": 1725836.7671,
+        "p_ztraty": 0.0242,
+        "naklady_planu": 50000000.0,
+        "naklady_pri_k_rozpoctu": 50000000.0,
+        "cena_opatrnosti": 10072778.4071,
+        "stin_kc_za_kc": 0.2033,
+        "spolecne_ha_s_puvodnim": 519.5964
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 60,
+        "pripustne": true,
+        "ha_zelenina": 139.1095,
+        "E": 23269446.9301,
+        "CVaR": 1946425.2589,
+        "p_ztraty": 0.0246,
+        "naklady_planu": 60000000.0,
+        "naklady_pri_k_rozpoctu": 60000000.0,
+        "cena_opatrnosti": 7968893.5286,
+        "stin_kc_za_kc": 0.1997,
+        "spolecne_ha_s_puvodnim": 634.122
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 80,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 30439259.5164,
+        "CVaR": 2879968.5096,
+        "p_ztraty": 0.0246,
+        "naklady_planu": 80000000.0,
+        "naklady_pri_k_rozpoctu": 80000000.0,
+        "cena_opatrnosti": 3917215.6101,
+        "stin_kc_za_kc": 0.164,
+        "spolecne_ha_s_puvodnim": 756.8794
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 100,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 34053761.2788,
+        "CVaR": 3501742.2711,
+        "p_ztraty": 0.02,
+        "naklady_planu": 100000000.0,
+        "naklady_pri_k_rozpoctu": 100000000.0,
+        "cena_opatrnosti": 1799077.8482,
+        "stin_kc_za_kc": 0.0819,
+        "spolecne_ha_s_puvodnim": 808.9779
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 120,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 37950200.0669,
+        "CVaR": 1724258.2814,
+        "p_ztraty": 0.0296,
+        "naklady_planu": 120000000.0,
+        "naklady_pri_k_rozpoctu": 120000000.0,
+        "cena_opatrnosti": 739600.449,
+        "stin_kc_za_kc": 0.0306,
+        "spolecne_ha_s_puvodnim": 866.8646
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 140,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 41527453.5477,
+        "CVaR": -788460.6625,
+        "p_ztraty": 0.0498,
+        "naklady_planu": 140000000.0,
+        "naklady_pri_k_rozpoctu": 140000000.0,
+        "cena_opatrnosti": 207333.1805,
+        "stin_kc_za_kc": 0.0144,
+        "spolecne_ha_s_puvodnim": 945.9104
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 160,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 44586793.4401,
+        "CVaR": -3433134.1939,
+        "p_ztraty": 0.0646,
+        "naklady_planu": 156897925.2697,
+        "naklady_pri_k_rozpoctu": 156897925.2697,
+        "cena_opatrnosti": -0.0,
+        "stin_kc_za_kc": 0.0,
+        "spolecne_ha_s_puvodnim": 1000.0
+      },
+      {
+        "varianta": "základní náklady",
+        "k_rozpoctu": 1.0,
+        "rozpocet_mil": 180,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 44586793.4401,
+        "CVaR": -3433134.1939,
+        "p_ztraty": 0.0646,
+        "naklady_planu": 156897925.2697,
+        "naklady_pri_k_rozpoctu": 156897925.2697,
+        "cena_opatrnosti": -0.0,
+        "stin_kc_za_kc": 0.0,
+        "spolecne_ha_s_puvodnim": 1000.0
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 25,
+        "pripustne": true,
+        "ha_zelenina": 0.9422,
+        "E": 8627361.2728,
+        "CVaR": -838279.7956,
+        "p_ztraty": 0.067,
+        "naklady_planu": 22241529.1051,
+        "naklady_pri_k_rozpoctu": 25000000.0,
+        "cena_opatrnosti": 16682288.8846,
+        "stin_kc_za_kc": 0.2973,
+        "spolecne_ha_s_puvodnim": 514.843
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 30,
+        "pripustne": true,
+        "ha_zelenina": 18.0885,
+        "E": 9981446.6769,
+        "CVaR": 396237.9642,
+        "p_ztraty": 0.0316,
+        "naklady_planu": 26689834.9262,
+        "naklady_pri_k_rozpoctu": 30000000.0,
+        "cena_opatrnosti": 15387987.3026,
+        "stin_kc_za_kc": 0.2181,
+        "spolecne_ha_s_puvodnim": 525.649
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 40,
+        "pripustne": true,
+        "ha_zelenina": 55.3197,
+        "E": 13524564.2309,
+        "CVaR": 1129647.4446,
+        "p_ztraty": 0.0238,
+        "naklady_planu": 35586446.5682,
+        "naklady_pri_k_rozpoctu": 40000000.0,
+        "cena_opatrnosti": 13249723.7854,
+        "stin_kc_za_kc": 0.1942,
+        "spolecne_ha_s_puvodnim": 494.0086
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 50,
+        "pripustne": true,
+        "ha_zelenina": 90.1713,
+        "E": 17081656.1826,
+        "CVaR": 1554441.0246,
+        "p_ztraty": 0.0236,
+        "naklady_planu": 44483058.2103,
+        "naklady_pri_k_rozpoctu": 50000000.0,
+        "cena_opatrnosti": 11258781.0195,
+        "stin_kc_za_kc": 0.1846,
+        "spolecne_ha_s_puvodnim": 502.0192
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 60,
+        "pripustne": true,
+        "ha_zelenina": 121.0919,
+        "E": 20662135.6699,
+        "CVaR": 1774746.5607,
+        "p_ztraty": 0.024,
+        "naklady_planu": 53379669.8523,
+        "naklady_pri_k_rozpoctu": 60000000.0,
+        "cena_opatrnosti": 9358388.5078,
+        "stin_kc_za_kc": 0.1792,
+        "spolecne_ha_s_puvodnim": 555.0986
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 80,
+        "pripustne": true,
+        "ha_zelenina": 172.0063,
+        "E": 27540532.2644,
+        "CVaR": 2292116.9169,
+        "p_ztraty": 0.0256,
+        "naklady_planu": 71172893.1364,
+        "naklady_pri_k_rozpoctu": 80000000.0,
+        "cena_opatrnosti": 5660505.0325,
+        "stin_kc_za_kc": 0.1752,
+        "spolecne_ha_s_puvodnim": 743.6062
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 100,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 32099081.5476,
+        "CVaR": 3382871.3992,
+        "p_ztraty": 0.021,
+        "naklady_planu": 88966116.4205,
+        "naklady_pri_k_rozpoctu": 100000000.0,
+        "cena_opatrnosti": 2835853.1497,
+        "stin_kc_za_kc": 0.0911,
+        "spolecne_ha_s_puvodnim": 782.5735
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 120,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 35331107.7529,
+        "CVaR": 3176377.7342,
+        "p_ztraty": 0.0224,
+        "naklady_planu": 106759339.7046,
+        "naklady_pri_k_rozpoctu": 120000000.0,
+        "cena_opatrnosti": 1323086.8796,
+        "stin_kc_za_kc": 0.0548,
+        "spolecne_ha_s_puvodnim": 829.0244
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 140,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 38784542.7568,
+        "CVaR": 1180808.7514,
+        "p_ztraty": 0.0318,
+        "naklady_planu": 124552562.9887,
+        "naklady_pri_k_rozpoctu": 140000000.0,
+        "cena_opatrnosti": 594153.869,
+        "stin_kc_za_kc": 0.0233,
+        "spolecne_ha_s_puvodnim": 883.9995
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 160,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 41943213.8436,
+        "CVaR": -1120838.4716,
+        "p_ztraty": 0.0516,
+        "naklady_planu": 142345786.2728,
+        "naklady_pri_k_rozpoctu": 160000000.0,
+        "cena_opatrnosti": 165641.9371,
+        "stin_kc_za_kc": 0.0107,
+        "spolecne_ha_s_puvodnim": 955.4861
+      },
+      {
+        "varianta": "s rezervou",
+        "k_rozpoctu": 1.124,
+        "rozpocet_mil": 180,
+        "pripustne": true,
+        "ha_zelenina": 200.0,
+        "E": 44586793.4401,
+        "CVaR": -3433134.1939,
+        "p_ztraty": 0.0646,
+        "naklady_planu": 156897925.2697,
+        "naklady_pri_k_rozpoctu": 176356945.2983,
+        "cena_opatrnosti": -0.0,
+        "stin_kc_za_kc": 0.0,
+        "spolecne_ha_s_puvodnim": 1000.0
+      }
+    ]
   }
 }
