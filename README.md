@@ -14,6 +14,8 @@ Případové studie I, FIS VŠE, ZS 2026/2027. Farma má 1 000 ha a vybírá z 2
 | Podrobné vysvětlení postupu s dosazenými čísly | [`osevni_plan/VYSVETLENI.md`](osevni_plan/VYSVETLENI.md) |
 | Hlavní tabulky a grafy | `osevni_plan/vystupy/` |
 | Podpůrné tabulky | `osevni_plan/vystupy/detaily/` |
+| Korelace scénářových marží plodin | `graf_korelace_marzi_2025.png` a označené dvojice v `detaily/pary_korelace_marzi_2025.csv` |
+| Souběh slabých národních výnosů | `graf_soubehu_slabych_vynosu_narodni.png`; metodika a závěr v [`osevni_plan/ANALYZA_NARODNI_SOUBEH.md`](osevni_plan/ANALYZA_NARODNI_SOUBEH.md) |
 
 Spuštění (Python 3.10+):
 

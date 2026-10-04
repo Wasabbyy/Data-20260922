@@ -15,6 +15,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.patches import Patch, Rectangle
+from matplotlib.lines import Line2D
+from scipy.stats import hypergeom
+from statsmodels.stats.multitest import multipletests
 
 import backtest as bt
 import data as dt
@@ -29,7 +33,9 @@ DET.mkdir(parents=True, exist_ok=True)
 ALTERNATIVNI_MODEL_VYNOSU = "prumer3"   # nejlepší CRPS, kandidát pro citlivostní analýzu
 N_SCENARU = 5000
 SEED = 2025
-LAMBDY = [0.0, 0.25, 0.5, 0.75, 1.0]
+LAMBDY = [0.0, 0.1, 0.25, 0.4, 0.5, 0.6, 0.75, 0.9, 1.0]
+KORELACE_RIZIKOVA = 0.70
+KORELACE_DIVERZIFIKACE = -0.50
 
 # Paleta (referenční kategorická, světlý režim) + neutrální šedá pro kontext
 MODRA, ORANZOVA, AQUA, SEDA, INK, INK2 = "#2a78d6", "#eb6834", "#1baf7a", "#a3a29c", "#0b0b0b", "#52514e"
@@ -43,6 +49,88 @@ plt.rcParams.update({
 
 def nazvy(index) -> list[str]:
     return [dt.NAZVY[k] for k in index]
+
+
+def analyzuj_korelace_marzi(M: np.ndarray) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Korelace marží napříč scénáři a dvojice se silnou závislostí."""
+    nazvy_plodin = nazvy(dt.KODY)
+    matice = pd.DataFrame(np.corrcoef(M, rowvar=False), index=nazvy_plodin, columns=nazvy_plodin)
+    dvojice = []
+    for i, prvni in enumerate(nazvy_plodin):
+        for j in range(i + 1, len(nazvy_plodin)):
+            korelace = float(matice.iat[i, j])
+            if korelace >= KORELACE_RIZIKOVA:
+                typ = "Silná kladná (riziková)"
+            elif korelace <= KORELACE_DIVERZIFIKACE:
+                typ = "Silná záporná (diverzifikace)"
+            else:
+                continue
+            dvojice.append({
+                "plodina_1": prvni,
+                "plodina_2": nazvy_plodin[j],
+                "korelace": korelace,
+                "typ": typ,
+            })
+    pary = pd.DataFrame(dvojice, columns=["plodina_1", "plodina_2", "korelace", "typ"])
+    if not pary.empty:
+        pary = pary.sort_values("korelace", ascending=False, ignore_index=True)
+    return matice, pary
+
+
+def krok_korelace_marzi(M: np.ndarray) -> tuple[pd.DataFrame, pd.DataFrame]:
+    matice, pary = analyzuj_korelace_marzi(M)
+    matice.to_csv(DET / "korelace_marzi_2025.csv", index_label="plodina")
+    pary.to_csv(DET / "pary_korelace_marzi_2025.csv", index=False)
+    return matice, pary
+
+
+def analyzuj_soubeh_narodnich_vynosu(vynosy: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Najde souběhy trendově slabých národních výnosů a testuje jejich četnost."""
+    slabe_roky = {}
+    dostupne_roky = {}
+    for kod in dt.KODY:
+        rada = np.log(vynosy[kod].where(vynosy[kod] > 0).dropna())
+        roky = rada.index.astype(int)
+        trend = np.polyval(np.polyfit(roky.to_numpy(float), rada.to_numpy(), 1), roky.to_numpy(float))
+        odchylka = pd.Series(rada.to_numpy() - trend, index=roky)
+        slabe_roky[kod] = set(odchylka[odchylka <= odchylka.quantile(0.10)].index)
+        dostupne_roky[kod] = set(roky)
+
+    matice = pd.DataFrame(0, index=nazvy(dt.KODY), columns=nazvy(dt.KODY), dtype=int)
+    dvojice = []
+    for i, prvni in enumerate(dt.KODY):
+        for druhy in dt.KODY[i + 1:]:
+            roky = dostupne_roky[prvni] & dostupne_roky[druhy]
+            slabe_prvni = slabe_roky[prvni] & roky
+            slabe_druhe = slabe_roky[druhy] & roky
+            spolecne = slabe_prvni & slabe_druhe
+            n = len(roky)
+            n_prvni, n_druhe, pozorovano = len(slabe_prvni), len(slabe_druhe), len(spolecne)
+            ocekavano = n_prvni * n_druhe / n
+            p = float(hypergeom.sf(pozorovano - 1, n, n_prvni, n_druhe))
+            matice.loc[dt.NAZVY[prvni], dt.NAZVY[druhy]] = pozorovano
+            matice.loc[dt.NAZVY[druhy], dt.NAZVY[prvni]] = pozorovano
+            dvojice.append({
+                "plodina_1": dt.NAZVY[prvni],
+                "plodina_2": dt.NAZVY[druhy],
+                "pocet_spolecnych_slabych_roku": pozorovano,
+                "ocekavano_pri_nezavislosti": ocekavano,
+                "p_hodnota": p,
+                "roky": ", ".join(map(str, sorted(spolecne))),
+            })
+    pary = pd.DataFrame(dvojice)
+    pary["q_hodnota_BH"] = multipletests(pary["p_hodnota"], method="fdr_bh")[1]
+    pary = pary.sort_values(
+        ["pocet_spolecnych_slabych_roku", "p_hodnota"], ascending=[False, True], ignore_index=True
+    )
+    return matice, pary
+
+
+def krok_soubehu_narodnich_vynosu(vynosy: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    matice, pary = analyzuj_soubeh_narodnich_vynosu(vynosy)
+    matice.to_csv(DET / "souběh_slabych_vynosu_narodni.csv", index_label="plodina")
+    pary.to_csv(DET / "dvojice_slaby_vynos_narodni.csv", index=False)
+    return matice, pary
 
 
 # --------------------------------------------------------------------------
@@ -354,6 +442,70 @@ def graf_plan(plan, rz):
     plt.close(fig)
 
 
+def graf_korelace_marzi(matice):
+    fig, ax = plt.subplots(figsize=(13, 11))
+    obraz = ax.imshow(matice.to_numpy(), cmap="RdYlBu_r", vmin=-1, vmax=1)
+    popisky = matice.columns.tolist()
+    ax.set_xticks(range(len(popisky)), labels=popisky, rotation=60, ha="right", fontsize=8)
+    ax.set_yticks(range(len(popisky)), labels=popisky, fontsize=8)
+    ax.tick_params(length=0)
+    ax.grid(False)
+    for i in range(len(popisky)):
+        for j in range(len(popisky)):
+            hodnota = matice.iat[i, j]
+            ax.text(j, i, f"{hodnota:.2f}", ha="center", va="center", fontsize=6,
+                    color="white" if abs(hodnota) > 0.65 else INK)
+            if i == j:
+                continue
+            if hodnota >= KORELACE_RIZIKOVA:
+                barva = ORANZOVA
+            elif hodnota <= KORELACE_DIVERZIFIKACE:
+                barva = MODRA
+            else:
+                continue
+            ax.add_patch(Rectangle((j - 0.5, i - 0.5), 1, 1, fill=False, edgecolor=barva, linewidth=1.8))
+    ax.set_title("Korelace scénářových marží plodin pro rok 2025", loc="left", color=INK, fontsize=13, pad=14)
+    legenda = [
+        Patch(facecolor="none", edgecolor=ORANZOVA, linewidth=2,
+              label=f"Silná kladná korelace (r ≥ {KORELACE_RIZIKOVA:.2f}): společné riziko"),
+        Patch(facecolor="none", edgecolor=MODRA, linewidth=2,
+              label=f"Silná záporná korelace (r ≤ {KORELACE_DIVERZIFIKACE:.2f}): možná diverzifikace"),
+    ]
+    ax.legend(handles=legenda, loc="upper left", bbox_to_anchor=(0, -0.27), frameon=False, fontsize=9)
+    bar = fig.colorbar(obraz, ax=ax, fraction=0.045, pad=0.04)
+    bar.set_label("Pearsonův korelační koeficient")
+    fig.subplots_adjust(left=0.27, bottom=0.32, right=0.91, top=0.92)
+    fig.savefig(OUT / "graf_korelace_marzi_2025.png")
+    plt.close(fig)
+
+
+def graf_soubehu_vynosu(pary):
+    top = pary.head(10).sort_values("pocet_spolecnych_slabych_roku")
+    popisky = [f"{r.plodina_1} – {r.plodina_2}" for r in top.itertuples()]
+    barvy = [ORANZOVA if p < 0.05 else SEDA for p in top["p_hodnota"]]
+    fig, ax = plt.subplots(figsize=(11, 6.2))
+    y = np.arange(len(top))
+    ax.barh(y, top["pocet_spolecnych_slabych_roku"], color=barvy, height=0.68)
+    ax.scatter(top["ocekavano_pri_nezavislosti"], y, marker="D", color=INK, s=24, zorder=3)
+    for yi, row in zip(y, top.itertuples()):
+        ax.text(row.pocet_spolecnych_slabych_roku + 0.08, yi, f"q = {row.q_hodnota_BH:.3f}",
+                va="center", fontsize=8, color=INK2)
+    ax.set_yticks(y, labels=popisky, fontsize=9)
+    ax.set_xlim(0, top["pocet_spolecnych_slabych_roku"].max() + 1.3)
+    ax.set_xlabel("Počet společných slabých let (z 32)")
+    fig.suptitle("Souběh slabých národních výnosů", x=0.19, y=0.98, ha="left", color=INK, fontsize=13)
+    fig.text(0.19, 0.94, "10 nejčastějších dvojic; žádná není průkazná po korekci 190 testů",
+             fontsize=9, color=INK2)
+    ax.legend(handles=[
+        Patch(facecolor=ORANZOVA, label="Neupravené p < 0,05; po korekci neprůkazné"),
+        Patch(facecolor=SEDA, label="Neupravené p ≥ 0,05"),
+        Line2D([], [], marker="D", color=INK, linestyle="None", label="Očekávání při nezávislosti"),
+    ], frameon=False, loc="lower right", fontsize=8)
+    fig.subplots_adjust(left=0.30, right=0.98, bottom=0.15, top=0.88)
+    fig.savefig(OUT / "graf_soubehu_slabych_vynosu_narodni.png")
+    plt.close(fig)
+
+
 def graf_rozhodovaci(piv):
     fig, ax = plt.subplots(figsize=(10, 4.2))
     styly = {
@@ -388,6 +540,9 @@ def main():
     data = dt.nacti()
     K = md.Kontext.z_dat(data)
 
+    print("0/5 souběh slabých národních výnosů ...")
+    matice_soubehu, pary_soubehu = krok_soubehu_narodnich_vynosu(data.vynosy)
+
     print("1/5 backtest modelů ...")
     btc, bty, mc, my, sc, sy, dm = krok_backtest(K)
     pocasi = krok_pocasi(K, data)
@@ -398,6 +553,7 @@ def main():
     print("2/5 scénáře 2025 ...")
     tab, M, naklady_2025, kor, info, (bod_lp, bod_ly, Ec, Ey) = krok_predikce_2025(
         K, data, btc, bty, model_cen, model_vynosu)
+    korelace_marzi, pary_korelace_marzi = krok_korelace_marzi(M)
 
     print("3/5 osevní plán 2025 ...")
     rng = np.random.default_rng(SEED + 1)
@@ -414,6 +570,8 @@ def main():
     graf_vejire(data, tab, K, btc, bty)
     graf_marze(tab, M)
     graf_plan(plan, rz)
+    graf_korelace_marzi(korelace_marzi)
+    graf_soubehu_vynosu(pary_soubehu)
     graf_rozhodovaci(piv)
 
     vysledky = {
@@ -422,6 +580,13 @@ def main():
         "diebold_mariano_t_p": dm,
         "pocasi": pocasi,
         "korelace": kor,
+        "korelace_marzi_problemove_pary": pary_korelace_marzi.to_dict(orient="records"),
+        "narodni_soubeh_slabych_vynosu": {
+            "pocet_testovanych_dvojic": len(pary_soubehu),
+            "pocet_neupravenych_pod_005": int((pary_soubehu["p_hodnota"] < 0.05).sum()),
+            "pocet_po_BH_pod_005": int((pary_soubehu["q_hodnota_BH"] < 0.05).sum()),
+            "nejcastejsi_dvojice": pary_soubehu.head(4).to_dict(orient="records"),
+        },
         "predikce_info": info,
         "plan_riziko": rz.round(3).to_dict(orient="index"),
         "rozhodovaci_backtest": souhrn_rb.round(2).to_dict(orient="index"),
@@ -437,6 +602,8 @@ def main():
     print((rz.drop(columns="p_ztraty") / 1e6).round(2).assign(p_ztraty=rz["p_ztraty"].round(3)))
     print(souhrn_rb)
     print(plan_cit)
+    print(pary_korelace_marzi.to_string(index=False))
+    print(pary_soubehu.head(10).to_string(index=False))
     print((rz_cit / 1e6).round(2))
     print(json.dumps(pocasi, ensure_ascii=False, indent=1))
 

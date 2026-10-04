@@ -145,6 +145,17 @@
       "crps_vs_bench": 0.9095,
       "podil_lepsi_nez_bench": 0.5143
     },
+    "arima": {
+      "mae": 0.1536,
+      "bias": 0.0066,
+      "crps": 0.121,
+      "pokryti80": 0.8321,
+      "pokryti95": 0.9143,
+      "is80": 0.8559,
+      "mae_vs_bench": 0.9375,
+      "crps_vs_bench": 0.943,
+      "podil_lepsi_nez_bench": 0.5214
+    },
     "naivni": {
       "mae": 0.1639,
       "bias": 0.0264,
@@ -154,17 +165,6 @@
       "is80": 0.9014,
       "mae_vs_bench": 1.0,
       "crps_vs_bench": 1.0,
-      "podil_lepsi_nez_bench": 0.0
-    },
-    "arima": {
-      "mae": 0.1639,
-      "bias": 0.0264,
-      "crps": 0.1289,
-      "pokryti80": 0.8071,
-      "pokryti95": 0.9071,
-      "is80": 0.9081,
-      "mae_vs_bench": 1.0,
-      "crps_vs_bench": 1.0041,
       "podil_lepsi_nez_bench": 0.0
     }
   },
@@ -178,41 +178,37 @@
       0.9740103537129374
     ],
     "vynosy_kombinace_vs_naivni": [
-      -2.720061928340667,
-      0.017510838584018806
+      -2.720061928340661,
+      0.01751083858401903
     ],
     "vynosy_kombinace_vs_prumer5": [
-      0.7436582554773052,
-      0.4703111768572221
+      0.7436582554773612,
+      0.4703111768571895
     ],
     "vynosy_kombinace_vs_prumer3": [
-      0.8272198112044792,
-      0.423037467446155
+      0.8272198112044842,
+      0.4230374674461519
     ],
     "vynosy_kombinace_vs_prumer3_mae": [
-      -0.6874248587151834,
-      0.5038952578794786
+      -0.6874248587152275,
+      0.503895257879452
     ],
     "vynosy_arima_vs_naivni": [
-      2.002935504743701,
-      0.06648985566285903
+      -1.7230470620826501,
+      0.10856615792047042
     ],
     "vynosy_pocasi_vs_trend15": [
-      0.18668569651807973,
-      0.8547889266197868
+      0.18668569651602107,
+      0.854788926621368
     ]
   },
   "pocasi": {
-    "mae_klimatologie": 0.14191061267814292,
-    "mae_oracle_se_znalosti_pocasi": 0.14489155318294214,
+    "mae_klimatologie": 0.14191061267814237,
+    "mae_oracle_se_znalosti_pocasi": 0.14489155318294147,
     "koeficienty_na_1_sd": {
       "Øepka": {
         "srazky": -0.0462,
         "teplota": -0.0302
-      },
-      "Hrách na zrno": {
-        "srazky": -0.0357,
-        "teplota": -0.017
       },
       "Zelí": {
         "srazky": 0.0287,
@@ -221,6 +217,10 @@
       "Pšenice": {
         "srazky": -0.0098,
         "teplota": 0.0129
+      },
+      "Hrách na zrno": {
+        "srazky": -0.0357,
+        "teplota": -0.017
       }
     },
     "sd_srazky_mm": 93.95873663533335,
@@ -280,7 +280,112 @@
       0.934
     ],
     "prumerna_korelace_chyb_cen": 0.1764055119938938,
-    "prumerna_korelace_chyb_vynosu": 0.15263426215075265
+    "prumerna_korelace_chyb_vynosu": 0.1526342621507519
+  },
+  "korelace_marzi_problemove_pary": [
+    {
+      "plodina_1": "Pšenice",
+      "plodina_2": "Jeèmen",
+      "korelace": 0.9304181281654919,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Pšenice",
+      "plodina_2": "Øepka",
+      "korelace": 0.8698591891306925,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Jeèmen",
+      "plodina_2": "Žito",
+      "korelace": 0.8660108126334227,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Pšenice",
+      "plodina_2": "Žito",
+      "korelace": 0.840978125660243,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Jeèmen",
+      "plodina_2": "Øepka",
+      "korelace": 0.8162540100255712,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Kukuøice na zrno",
+      "plodina_2": "Sluneènice",
+      "korelace": 0.7894491734569798,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Pšenice",
+      "plodina_2": "Hrách na zrno",
+      "korelace": 0.7671739382437869,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Jeèmen",
+      "plodina_2": "Hrách na zrno",
+      "korelace": 0.7468260748992204,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Øepka",
+      "plodina_2": "Hrách na zrno",
+      "korelace": 0.7322696754684569,
+      "typ": "Silná kladná (riziková)"
+    },
+    {
+      "plodina_1": "Žito",
+      "plodina_2": "Øepka",
+      "korelace": 0.7211242138649825,
+      "typ": "Silná kladná (riziková)"
+    }
+  ],
+  "narodni_soubeh_slabych_vynosu": {
+    "pocet_testovanych_dvojic": 190,
+    "pocet_neupravenych_pod_005": 4,
+    "pocet_po_BH_pod_005": 0,
+    "nejcastejsi_dvojice": [
+      {
+        "plodina_1": "Pšenice",
+        "plodina_2": "Zelený èesnek",
+        "pocet_spolecnych_slabych_roku": 3,
+        "ocekavano_pri_nezavislosti": 0.5,
+        "p_hodnota": 0.0031423804226918804,
+        "roky": "2003, 2006, 2012",
+        "q_hodnota_BH": 0.14926307007786432
+      },
+      {
+        "plodina_1": "Jeèmen",
+        "plodina_2": "Oves",
+        "pocet_spolecnych_slabych_roku": 3,
+        "ocekavano_pri_nezavislosti": 0.5,
+        "p_hodnota": 0.0031423804226918804,
+        "roky": "2006, 2007, 2010",
+        "q_hodnota_BH": 0.14926307007786432
+      },
+      {
+        "plodina_1": "Žito",
+        "plodina_2": "Hrách na zrno",
+        "pocet_spolecnych_slabych_roku": 3,
+        "ocekavano_pri_nezavislosti": 0.5,
+        "p_hodnota": 0.0031423804226918804,
+        "roky": "2002, 2010, 2024",
+        "q_hodnota_BH": 0.14926307007786432
+      },
+      {
+        "plodina_1": "Kukuøice na zrno",
+        "plodina_2": "Brambory",
+        "pocet_spolecnych_slabych_roku": 3,
+        "ocekavano_pri_nezavislosti": 0.5,
+        "p_hodnota": 0.0031423804226918804,
+        "roky": "1994, 1995, 2015",
+        "q_hodnota_BH": 0.14926307007786432
+      }
+    ]
   },
   "predikce_info": {
     "model_cen": "kombinace",

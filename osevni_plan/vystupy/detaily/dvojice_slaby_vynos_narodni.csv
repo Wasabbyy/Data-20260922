@@ -1,0 +1,191 @@
+plodina_1,plodina_2,pocet_spolecnych_slabych_roku,ocekavano_pri_nezavislosti,p_hodnota,roky,q_hodnota_BH
+Pšenice,Zelený česnek,3,0.5,0.0031423804226918804,"2003, 2006, 2012",0.14926307007786432
+Ječmen,Oves,3,0.5,0.0031423804226918804,"2006, 2007, 2010",0.14926307007786432
+Žito,Hrách na zrno,3,0.5,0.0031423804226918804,"2002, 2010, 2024",0.14926307007786432
+Kukuřice na zrno,Brambory,3,0.5,0.0031423804226918804,"1994, 1995, 2015",0.14926307007786432
+Pšenice,Ječmen,2,0.5,0.06621245828698555,"2000, 2006",0.4492988240902591
+Ječmen,Žito,2,0.5,0.06621245828698555,"2006, 2010",0.4492988240902591
+Ječmen,Zelený česnek,2,0.5,0.06621245828698555,"2006, 2007",0.4492988240902591
+Žito,Oves,2,0.5,0.06621245828698555,"2006, 2010",0.4492988240902591
+Žito,Řepka,2,0.5,0.06621245828698555,"2002, 2024",0.4492988240902591
+Žito,Zelí,2,0.5,0.06621245828698555,"2002, 2024",0.4492988240902591
+Oves,Len olejný,2,0.5,0.06621245828698555,"2007, 2023",0.4492988240902591
+Oves,Zelený česnek,2,0.5,0.06621245828698555,"2006, 2007",0.4492988240902591
+Kukuřice na zrno,Slunečnice,2,0.5,0.06621245828698555,"1995, 2015",0.4492988240902591
+Kukuřice na zrno,Cukrová řepa,2,0.5,0.06621245828698555,"1994, 2018",0.4492988240902591
+Kukuřice na zrno,Papriky a chilli,2,0.5,0.06621245828698555,"1994, 2018",0.4492988240902591
+Řepka,Hrách na zrno,2,0.5,0.06621245828698555,"2002, 2024",0.4492988240902591
+Řepka,Zelí,2,0.5,0.06621245828698555,"2002, 2024",0.4492988240902591
+Řepka,Cibule a šalotka,2,0.5,0.06621245828698555,"2003, 2024",0.4492988240902591
+Slunečnice,Brambory,2,0.5,0.06621245828698555,"1995, 2015",0.4492988240902591
+Slunečnice,Rajčata,2,0.5,0.06621245828698555,"2010, 2015",0.4492988240902591
+Len olejný,Cukrová řepa,2,0.5,0.06621245828698555,"1994, 2023",0.4492988240902591
+Len olejný,Papriky a chilli,2,0.5,0.06621245828698555,"1994, 1998",0.4492988240902591
+Hrách na zrno,Zelí,2,0.5,0.06621245828698555,"2002, 2024",0.4492988240902591
+Hrách na zrno,Květák a brokolice,2,0.5,0.06621245828698555,"2002, 2012",0.4492988240902591
+Cukrová řepa,Papriky a chilli,2,0.5,0.06621245828698555,"1994, 2018",0.4492988240902591
+Cukrová řepa,Okurky a nakládačky,2,0.5,0.06621245828698555,"2018, 2020",0.4492988240902591
+Brambory,Cibule a šalotka,2,0.5,0.06621245828698555,"2003, 2015",0.4492988240902591
+Zelený česnek,Cibule a šalotka,2,0.5,0.06621245828698555,"2003, 2007",0.4492988240902591
+Pšenice,Žito,1,0.5,0.43061735261401574,2006,0.8181729699666299
+Pšenice,Oves,1,0.5,0.43061735261401574,2006,0.8181729699666299
+Pšenice,Řepka,1,0.5,0.43061735261401574,2003,0.8181729699666299
+Pšenice,Hrách na zrno,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Pšenice,Brambory,1,0.5,0.43061735261401574,2003,0.8181729699666299
+Pšenice,Mrkev a tuřín,1,0.5,0.43061735261401574,2000,0.8181729699666299
+Pšenice,Květák a brokolice,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Pšenice,Okurky a nakládačky,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Pšenice,Salát a čekanka,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Pšenice,Cibule a šalotka,1,0.5,0.43061735261401574,2003,0.8181729699666299
+Ječmen,Slunečnice,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Ječmen,Len olejný,1,0.5,0.43061735261401574,2007,0.8181729699666299
+Ječmen,Hrách na zrno,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Ječmen,Mrkev a tuřín,1,0.5,0.43061735261401574,2000,0.8181729699666299
+Ječmen,Cibule a šalotka,1,0.5,0.43061735261401574,2007,0.8181729699666299
+Ječmen,Rajčata,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Žito,Slunečnice,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Žito,Květák a brokolice,1,0.5,0.43061735261401574,2002,0.8181729699666299
+Žito,Zelený česnek,1,0.5,0.43061735261401574,2006,0.8181729699666299
+Žito,Cibule a šalotka,1,0.5,0.43061735261401574,2024,0.8181729699666299
+Žito,Rajčata,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Oves,Slunečnice,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Oves,Hrách na zrno,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Oves,Cukrová řepa,1,0.5,0.43061735261401574,2023,0.8181729699666299
+Oves,Cibule a šalotka,1,0.5,0.43061735261401574,2007,0.8181729699666299
+Oves,Rajčata,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Kukuřice na zrno,Len olejný,1,0.5,0.43061735261401574,1994,0.8181729699666299
+Kukuřice na zrno,Zelí,1,0.5,0.43061735261401574,2018,0.8181729699666299
+Kukuřice na zrno,Květák a brokolice,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Kukuřice na zrno,Okurky a nakládačky,1,0.5,0.43061735261401574,2018,0.8181729699666299
+Kukuřice na zrno,Cibule a šalotka,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Kukuřice na zrno,Rajčata,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Řepka,Brambory,1,0.5,0.43061735261401574,2003,0.8181729699666299
+Řepka,Květák a brokolice,1,0.5,0.43061735261401574,2002,0.8181729699666299
+Řepka,Zelený česnek,1,0.5,0.43061735261401574,2003,0.8181729699666299
+Slunečnice,Hrách na zrno,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Slunečnice,Květák a brokolice,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Slunečnice,Salát a čekanka,1,0.5,0.43061735261401574,2013,0.8181729699666299
+Slunečnice,Cibule a šalotka,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Len olejný,Brambory,1,0.5,0.43061735261401574,1994,0.8181729699666299
+Len olejný,Zelený česnek,1,0.5,0.43061735261401574,2007,0.8181729699666299
+Len olejný,Salát a čekanka,1,0.5,0.43061735261401574,1998,0.8181729699666299
+Len olejný,Cibule a šalotka,1,0.5,0.43061735261401574,2007,0.8181729699666299
+Hrách na zrno,Okurky a nakládačky,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Hrách na zrno,Zelený česnek,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Hrách na zrno,Salát a čekanka,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Hrách na zrno,Cibule a šalotka,1,0.5,0.43061735261401574,2024,0.8181729699666299
+Hrách na zrno,Rajčata,1,0.5,0.43061735261401574,2010,0.8181729699666299
+Cukrová řepa,Brambory,1,0.5,0.43061735261401574,1994,0.8181729699666299
+Cukrová řepa,Zelí,1,0.5,0.43061735261401574,2018,0.8181729699666299
+Cukrová řepa,Rajčata,1,0.5,0.43061735261401574,2020,0.8181729699666299
+Brambory,Květák a brokolice,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Brambory,Papriky a chilli,1,0.5,0.43061735261401574,1994,0.8181729699666299
+Brambory,Zelený česnek,1,0.5,0.43061735261401574,2003,0.8181729699666299
+Brambory,Rajčata,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Zelí,Květák a brokolice,1,0.5,0.43061735261401574,2002,0.8181729699666299
+Zelí,Papriky a chilli,1,0.5,0.43061735261401574,2018,0.8181729699666299
+Zelí,Okurky a nakládačky,1,0.5,0.43061735261401574,2018,0.8181729699666299
+Zelí,Cibule a šalotka,1,0.5,0.43061735261401574,2024,0.8181729699666299
+Květák a brokolice,Okurky a nakládačky,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Květák a brokolice,Zelený česnek,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Květák a brokolice,Salát a čekanka,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Květák a brokolice,Cibule a šalotka,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Květák a brokolice,Rajčata,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Papriky a chilli,Okurky a nakládačky,1,0.5,0.43061735261401574,2018,0.8181729699666299
+Papriky a chilli,Salát a čekanka,1,0.5,0.43061735261401574,1998,0.8181729699666299
+Papriky a chilli,Rajčata,1,0.5,0.43061735261401574,2017,0.8181729699666299
+Okurky a nakládačky,Zelený česnek,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Okurky a nakládačky,Salát a čekanka,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Okurky a nakládačky,Rajčata,1,0.5,0.43061735261401574,2020,0.8181729699666299
+Zelený česnek,Salát a čekanka,1,0.5,0.43061735261401574,2012,0.8181729699666299
+Cibule a šalotka,Rajčata,1,0.5,0.43061735261401574,2015,0.8181729699666299
+Pšenice,Kukuřice na zrno,0,0.5,1.0,,1.0
+Pšenice,Slunečnice,0,0.5,1.0,,1.0
+Pšenice,Len olejný,0,0.5,1.0,,1.0
+Pšenice,Cukrová řepa,0,0.5,1.0,,1.0
+Pšenice,Zelí,0,0.5,1.0,,1.0
+Pšenice,Papriky a chilli,0,0.5,1.0,,1.0
+Pšenice,Rajčata,0,0.5,1.0,,1.0
+Ječmen,Kukuřice na zrno,0,0.5,1.0,,1.0
+Ječmen,Řepka,0,0.5,1.0,,1.0
+Ječmen,Cukrová řepa,0,0.5,1.0,,1.0
+Ječmen,Brambory,0,0.5,1.0,,1.0
+Ječmen,Zelí,0,0.5,1.0,,1.0
+Ječmen,Květák a brokolice,0,0.5,1.0,,1.0
+Ječmen,Papriky a chilli,0,0.5,1.0,,1.0
+Ječmen,Okurky a nakládačky,0,0.5,1.0,,1.0
+Ječmen,Salát a čekanka,0,0.5,1.0,,1.0
+Žito,Kukuřice na zrno,0,0.5,1.0,,1.0
+Žito,Len olejný,0,0.5,1.0,,1.0
+Žito,Cukrová řepa,0,0.5,1.0,,1.0
+Žito,Brambory,0,0.5,1.0,,1.0
+Žito,Mrkev a tuřín,0,0.5,1.0,,1.0
+Žito,Papriky a chilli,0,0.5,1.0,,1.0
+Žito,Okurky a nakládačky,0,0.5,1.0,,1.0
+Žito,Salát a čekanka,0,0.5,1.0,,1.0
+Oves,Kukuřice na zrno,0,0.5,1.0,,1.0
+Oves,Řepka,0,0.5,1.0,,1.0
+Oves,Brambory,0,0.5,1.0,,1.0
+Oves,Zelí,0,0.5,1.0,,1.0
+Oves,Mrkev a tuřín,0,0.5,1.0,,1.0
+Oves,Květák a brokolice,0,0.5,1.0,,1.0
+Oves,Papriky a chilli,0,0.5,1.0,,1.0
+Oves,Okurky a nakládačky,0,0.5,1.0,,1.0
+Oves,Salát a čekanka,0,0.5,1.0,,1.0
+Kukuřice na zrno,Řepka,0,0.5,1.0,,1.0
+Kukuřice na zrno,Hrách na zrno,0,0.5,1.0,,1.0
+Kukuřice na zrno,Mrkev a tuřín,0,0.5,1.0,,1.0
+Kukuřice na zrno,Zelený česnek,0,0.5,1.0,,1.0
+Kukuřice na zrno,Salát a čekanka,0,0.5,1.0,,1.0
+Řepka,Slunečnice,0,0.5,1.0,,1.0
+Řepka,Len olejný,0,0.5,1.0,,1.0
+Řepka,Cukrová řepa,0,0.5,1.0,,1.0
+Řepka,Mrkev a tuřín,0,0.5,1.0,,1.0
+Řepka,Papriky a chilli,0,0.5,1.0,,1.0
+Řepka,Okurky a nakládačky,0,0.5,1.0,,1.0
+Řepka,Salát a čekanka,0,0.5,1.0,,1.0
+Řepka,Rajčata,0,0.5,1.0,,1.0
+Slunečnice,Len olejný,0,0.5,1.0,,1.0
+Slunečnice,Cukrová řepa,0,0.5,1.0,,1.0
+Slunečnice,Zelí,0,0.5,1.0,,1.0
+Slunečnice,Mrkev a tuřín,0,0.5,1.0,,1.0
+Slunečnice,Papriky a chilli,0,0.5,1.0,,1.0
+Slunečnice,Okurky a nakládačky,0,0.5,1.0,,1.0
+Slunečnice,Zelený česnek,0,0.5,1.0,,1.0
+Len olejný,Hrách na zrno,0,0.5,1.0,,1.0
+Len olejný,Zelí,0,0.5,1.0,,1.0
+Len olejný,Mrkev a tuřín,0,0.5,1.0,,1.0
+Len olejný,Květák a brokolice,0,0.5,1.0,,1.0
+Len olejný,Okurky a nakládačky,0,0.5,1.0,,1.0
+Len olejný,Rajčata,0,0.5,1.0,,1.0
+Hrách na zrno,Cukrová řepa,0,0.5,1.0,,1.0
+Hrách na zrno,Brambory,0,0.5,1.0,,1.0
+Hrách na zrno,Mrkev a tuřín,0,0.5,1.0,,1.0
+Hrách na zrno,Papriky a chilli,0,0.5,1.0,,1.0
+Cukrová řepa,Mrkev a tuřín,0,0.5,1.0,,1.0
+Cukrová řepa,Květák a brokolice,0,0.5,1.0,,1.0
+Cukrová řepa,Zelený česnek,0,0.5,1.0,,1.0
+Cukrová řepa,Salát a čekanka,0,0.5,1.0,,1.0
+Cukrová řepa,Cibule a šalotka,0,0.5,1.0,,1.0
+Brambory,Zelí,0,0.5,1.0,,1.0
+Brambory,Mrkev a tuřín,0,0.5,1.0,,1.0
+Brambory,Okurky a nakládačky,0,0.5,1.0,,1.0
+Brambory,Salát a čekanka,0,0.5,1.0,,1.0
+Zelí,Mrkev a tuřín,0,0.5,1.0,,1.0
+Zelí,Zelený česnek,0,0.5,1.0,,1.0
+Zelí,Salát a čekanka,0,0.5,1.0,,1.0
+Zelí,Rajčata,0,0.5,1.0,,1.0
+Mrkev a tuřín,Květák a brokolice,0,0.5,1.0,,1.0
+Mrkev a tuřín,Papriky a chilli,0,0.5,1.0,,1.0
+Mrkev a tuřín,Okurky a nakládačky,0,0.5,1.0,,1.0
+Mrkev a tuřín,Zelený česnek,0,0.5,1.0,,1.0
+Mrkev a tuřín,Salát a čekanka,0,0.5,1.0,,1.0
+Mrkev a tuřín,Cibule a šalotka,0,0.5,1.0,,1.0
+Mrkev a tuřín,Rajčata,0,0.5,1.0,,1.0
+Květák a brokolice,Papriky a chilli,0,0.5,1.0,,1.0
+Papriky a chilli,Zelený česnek,0,0.5,1.0,,1.0
+Papriky a chilli,Cibule a šalotka,0,0.5,1.0,,1.0
+Okurky a nakládačky,Cibule a šalotka,0,0.5,1.0,,1.0
+Zelený česnek,Rajčata,0,0.5,1.0,,1.0
+Salát a čekanka,Cibule a šalotka,0,0.5,1.0,,1.0
+Salát a čekanka,Rajčata,0,0.5,1.0,,1.0

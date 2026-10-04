@@ -11,6 +11,7 @@ import backtest as bt  # noqa: E402
 import data as dt  # noqa: E402
 import modely as md  # noqa: E402
 import optimalizace as op  # noqa: E402
+import spust as sp  # noqa: E402
 
 
 @pytest.fixture(scope="module")
@@ -93,6 +94,37 @@ def test_bootstrap_zachova_prumer_a_korelace():
     assert S.mean(axis=0) == pytest.approx(E.mean(axis=0), abs=0.01)
     assert np.cov(S.T) == pytest.approx(ocekavana, abs=0.01)
     assert np.corrcoef(S.T)[0, 1] == pytest.approx(np.corrcoef(E.T)[0, 1], abs=0.005)
+
+
+    def test_korelace_marzi_oznaci_silne_dvojice():
+        x = np.array([-2.0, -1.0, 1.0, 2.0])
+        nezavisla = np.array([1.0, -2.0, 2.0, -1.0])
+        M = np.column_stack([x, x, -x, nezavisla] + [nezavisla * (i + 1) for i in range(16)])
+        matice, pary = sp.analyzuj_korelace_marzi(M)
+
+        assert matice.iat[0, 1] == pytest.approx(1.0)
+        assert matice.iat[0, 2] == pytest.approx(-1.0)
+        assert ((pary["plodina_1"] == "Pšenice") & (pary["plodina_2"] == "Ječmen") &
+            (pary["typ"] == "Silná kladná (riziková)")).any()
+        assert ((pary["plodina_1"] == "Pšenice") & (pary["plodina_2"] == "Žito") &
+            (pary["typ"] == "Silná záporná (diverzifikace)")).any()
+
+
+    def test_narodni_soubeh_vynosu_zachyti_spolecne_slabe_roky():
+        rng = np.random.default_rng(12)
+        roky = np.arange(1993, 2025)
+        odchylky = rng.normal(0, 0.1, size=(len(roky), len(dt.KODY)))
+        odchylky[:, 1] = odchylky[:, 0]
+        log_vynosy = 0.01 * (roky - roky[0])[:, None] + odchylky
+        vynosy = pd.DataFrame(np.exp(log_vynosy), index=roky, columns=dt.KODY)
+
+        matice, pary = sp.analyzuj_soubeh_narodnich_vynosu(vynosy)
+
+        prvni, druhy = dt.NAZVY[dt.KODY[0]], dt.NAZVY[dt.KODY[1]]
+        assert matice.loc[prvni, druhy] == 4
+        nalez = pary[(pary["plodina_1"] == prvni) & (pary["plodina_2"] == druhy)].iloc[0]
+        assert nalez["ocekavano_pri_nezavislosti"] == pytest.approx(0.5)
+        assert nalez["q_hodnota_BH"] >= nalez["p_hodnota"]
 
 
 def test_pocasi_je_spolecna_ols(data):
