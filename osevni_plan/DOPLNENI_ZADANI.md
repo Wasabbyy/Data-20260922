@@ -184,6 +184,8 @@ Výši rozpočtu neznáme, proto dáváme plán pro každou výši (`vystupy/dop
 Při nízkém rozpočtu rozhoduje rozpočet a na limitu zeleniny nezáleží. Při vysokém rozpočtu rozhoduje limit. Hranice leží zhruba u 50 mil. Kč pro limit 100 ha, 80 mil. Kč pro 200 ha a 120 mil. Kč pro 300 ha.
 
 ## 4. Plán odolný vůči růstu nákladů
+**Odolný plán podle λ** je navíc v samostatné tabulce `vystupy/doplneni/odolny_plan_podle_lambda.csv`. Každý sloupec minimalizuje největší lítost přes stejné čtyři scénáře růstu nákladů, ale s jinou vahou CVaR; sloupec `lambda_0.5` odpovídá nastavení doporučeného odolného plánu níže. Původní tabulky a doporučení zůstávají beze změny.
+
 
 Původní plán je optimální jen pro základní náklady. Hledáme proto jeden plán, který se v žádném ze čtyř scénářů růstu nákladů příliš neliší od plánu optimálního pro daný scénář. **Lítost** plánu $x$ ve scénáři $s$ je hodnota nejlepšího plánu pro $s$ minus hodnota plánu $x$ v $s$. Odolný plán minimalizuje největší lítost přes scénáře:
 

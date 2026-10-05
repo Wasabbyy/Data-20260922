@@ -30,6 +30,7 @@ LIMITY_ZELENINY = [0, 50, 100, 150, 200, 250, 300, 350, 400]   # ha
 ROZPOCTY_MIL = [25, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180]
 LIMITY_PRO_ROZPOCET = [100, 200, 300]
 LIMITY_PRO_DOPORUCENI = [100, 150, 200, 250, 300]             # ha, limit zeleniny je odhad na obě strany
+LAMBDY_ODOLNEHO_PLANU = [0.0, 0.25, 0.5, 0.75, 1.0]
 
 
 @dataclass(frozen=True)
@@ -77,6 +78,16 @@ def spolecne_ha(x: np.ndarray, y: np.ndarray) -> float:
 def tabulka_planu(plany: dict, nazvy: list[str]) -> pd.DataFrame:
     tab = pd.DataFrame(plany, index=pd.Index(nazvy, name="plodina")).round(1)
     return tab[(tab > 0.05).any(axis=1)]
+
+
+def krok_odolny_podle_lambda(T_opt, C, om, scenare, nazvy):
+    """Robustní minimax plány pro různé váhy CVaR při stejné sadě scénářů nákladů."""
+    marze = [T_opt - naklady_scenare(C, om.zelenina, s) for s in scenare]
+    plany = {
+        f"lambda_{lam}": op.minimax_litost(marze, om, lam=lam)[0]
+        for lam in LAMBDY_ODOLNEHO_PLANU
+    }
+    return tabulka_planu(plany, nazvy)
 
 
 # --------------------------------------------------------------------------
@@ -229,6 +240,7 @@ def spust(data: dt.Data, T_opt: np.ndarray, T_test: np.ndarray, naklady_2025: pd
     zvrat = bod_zvratu(T_opt, C, x_zaklad, nazvy)       # stejná sada scénářů jako predikce_2025.csv
     k_plan = float((T_test.mean(axis=0) @ x_zaklad) / (C @ x_zaklad))
     dop, dop_plany, x_rob = krok_doporuceni(T_opt, T_test, C, om, scenare, k_rezerva, nazvy)
+    lambda_plany = krok_odolny_podle_lambda(T_opt, C, om, scenare, nazvy)
     sc, sc_plany = krok_scenare(T_opt, T_test, C, om, x_zaklad, x_rob, scenare, nazvy)
     cit, cit_plany = krok_citlivost(T_opt, T_test, C, om, x_zaklad, x_rob, nazvy)
     mrizka = krok_mrizka(T_opt, C, om, x_zaklad)
@@ -243,6 +255,7 @@ def spust(data: dt.Data, T_opt: np.ndarray, T_test: np.ndarray, naklady_2025: pd
 
     dop.round(3).to_csv(out / "doporuceny_plan_podle_limitu_zeleniny.csv")
     dop_plany.to_csv(out / "doporuceny_plan_podle_limitu_zeleniny_plany.csv")
+    lambda_plany.to_csv(out / "odolny_plan_podle_lambda.csv")
     zvrat.round(3).to_csv(out / "naklady_bod_zvratu.csv")
     sc.round(3).to_csv(out / "naklady_scenare.csv")
     sc_plany.to_csv(out / "naklady_scenare_plany.csv")
@@ -275,5 +288,6 @@ def spust(data: dt.Data, T_opt: np.ndarray, T_test: np.ndarray, naklady_2025: pd
     }
     tabulky = {"zvrat": zvrat, "scenare": sc, "scenare_plany": sc_plany, "citlivost": cit, "citlivost_plany": cit_plany,
                "mrizka": mrizka, "limit": lim, "limit_plany": lim_plany, "rozpocet": roz, "rozpocet_plany": roz_plany,
-               "rozpocet_x_zelenina": roz_zel, "jadro": jadro_tab, "doporuceni": dop, "doporuceni_plany": dop_plany}
+               "rozpocet_x_zelenina": roz_zel, "jadro": jadro_tab, "doporuceni": dop, "doporuceni_plany": dop_plany,
+               "odolny_plan_podle_lambda": lambda_plany}
     return {"souhrn": souhrn, "tabulky": tabulky}

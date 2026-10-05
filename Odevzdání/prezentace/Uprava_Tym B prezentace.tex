@@ -1,6 +1,7 @@
 \documentclass[11pt]{beamer}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage[czech]{babel}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -32,57 +33,51 @@
 \setbeamerfont{title}{size=\Large}
 \setbeamerfont{frametitle}{size=\large}
 
-\title{Tým B: Osevní plán 2025}
+\title{Osevní plán 2025 (Tým B)}
 \author{Návrh pro rozhodování}
 \date{\today}
 
 \begin{document}
 
 \begin{frame}
-  \titlepage
+  \titlepage%
 \end{frame}
 
-\begin{frame}{Stručné představení problému}
-  \vspace{0.3cm}
-  \begin{center}
-    \textbf{Jak rozdělit 1 000 ha mezi 20 plodin, když neznáme budoucí ceny, výnosy a náklady?}
-  \end{center}
-  \vspace{0.5cm}
-  \begin{center}
-    \begin{tikzpicture}
-      \node[draw, rounded corners, fill=blue!10, minimum width=2.5cm] (A) {1 000 ha};
-      \node[draw, rounded corners, fill=green!10, minimum width=2.5cm, right=1.6cm of A] (B) {20 plodin};
-      \node[draw, rounded corners, fill=orange!20, minimum width=3.2cm, right=1.6cm of B] (C) {zisk + riziko};
-      \draw[->, thick] (A) -- (B);
-      \draw[->, thick] (B) -- (C);
-    \end{tikzpicture}
-  \end{center}
-  \vspace{0.4cm}
-  \begin{itemize}
-    \item Rozhodování probíhá pod silnou nejistotou.
-    \item Cílem je maximalizovat zisk a současně omezit riziko výrazné ztráty.
-  \end{itemize}
-\end{frame}
+\begin{frame}{Problém a cíle projektu}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.47\textwidth}
+    \begin{block}{Zadání}
+      \begin{minipage}[t][4.4cm][t]{\linewidth}
+        \raggedright%
+        \large
+        Jak rozdělit 1 000 ha mezi 20 plodin pro rok 2025 při nejistotě cen, výnosů a nákladů?
+        \normalsize
+        \vspace{0.2cm}
 
-\begin{frame}{Vlastní formulace zadání a cílů projektu}
-  \begin{block}{Zadání}
-    Navrhnout osevní plán pro rok 2025, který respektuje nejistotu cen, výnosů, rostoucích nákladů a omezení rozpočtu.
-  \end{block}
-  \vspace{0.3cm}
-  \begin{block}{Cíle}
-    \begin{itemize}
-      \item Vytvořit rozdělení ploch s vyváženým poměrem zisku a rizika.
-      \item Porovnat varianty podle averze k riziku a nalézt odolný plán vůči růstu nákladů.
-      \item Posoudit citlivost plánu na rozpočet farmy a kapacitní limity zeleniny.
-    \end{itemize}
-  \end{block}
+        Plán musí zohlednit také rozpočet farmy a limit zeleniny.
+      \end{minipage}
+    \end{block}
+
+    \column{0.47\textwidth}
+    \begin{block}{Cíle projektu}
+      \begin{minipage}[t][4.4cm][t]{\linewidth}
+        \raggedright%
+        \begin{itemize}
+          \item Vyvážit očekávaný zisk a riziko výrazné ztráty.
+          \item Porovnat plány při různé averzi k riziku.
+          \item Najít odolný plán při růstu nákladů.
+          \item Ověřit citlivost na rozpočet a limit zeleniny.
+        \end{itemize}
+      \end{minipage}
+    \end{block}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Použité metody}
   \textbf{Vstupní data \& Predikce:}
   \begin{itemize}
     \item Historické řady 1993–2024 (ceny, výnosy, náklady a CPI).
-    \item Výběr nejlepších modelů podle out-of-sample výkonu (CRPS, MAE).
+    \item Výběr nejlepších modelů podle out-of-sample testování (CRPS, MAE).
   \end{itemize}
   
   \vspace{0.15cm}
@@ -95,14 +90,15 @@
   \textbf{Optimalizační model (Mean-CVaR):}
   \begin{itemize}
     \item Maximalizace očekávaného zisku s penalizací nejhorších 10\,\% scénářů:
-          $$\max_x (1-\lambda)E[Z(x)] + \lambda \mathrm{CVaR}_{10}[Z(x)]$$
+          \[\max_x (1-\lambda)E[Z(x)] + \lambda \mathrm{CVaR}_{10}[Z(x)]\]
   \end{itemize}
 
   \vspace{0.15cm}
-  \begin{block}{Omezení úlohy}
-    \small
-    $$\sum_i x_i = 1000\text{ ha}, \quad 0 \le x_i \le 250\text{ ha}, \quad \sum_{i \in \text{zelenina}} x_i \le \text{limit}, \quad \sum_i C_i x_i \le \text{rozpočet}$$
-  \end{block}
+  \vspace{0.1cm}
+  \textbf{Odolný plán při růstu nákladů:}
+  \begin{itemize}
+    \item Minimalizace nejvyšší lítosti přes čtyři scénáře nákladů (základ, růst jako 2008, 2023 a 2022), při $\lambda=0{,}5$.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Analýza a výsledky: Hlavní výsledky}
@@ -117,7 +113,7 @@
   \vspace{0.1cm}
   \begin{center}
     % Zvětšení grafu na téměř plnou šířku slajdu
-    \includegraphics[width=0.95\textwidth]{graf_marze_2025.png}
+    \includegraphics[width=0.90\textwidth]{vystupy/graf_marze_2025.png}
   \end{center}
 \end{frame}
 
@@ -126,7 +122,7 @@
   \scriptsize
   \begin{tabular}{crrc}
     \toprule
-    \textbf{$\boldsymbol{\lambda}$} & \textbf{Očekávaný zisk} & \textbf{$\boldsymbol{\mathrm{CVaR}_{\mathbf{10}}}$} & \textbf{P(ztráta)} \\
+    \textbf{$\boldsymbol{\lambda}$} & \textbf{Očekávaný zisk} & \textbf{$\boldsymbol{\mathrm{CVaR}_{\mathbf{10}}}$} & \textbf{P (ztráta)} \\
     \midrule
     0,00 & 86,9 mil. Kč & -101,0 mil. Kč & 33,5\,\% \\
     0,10 & 86,9 mil. Kč & -101,0 mil. Kč & 33,5\,\% \\
@@ -144,7 +140,7 @@
   \begin{block}{Interpretace}
     \small
     \begin{itemize}
-      \item Růst $\lambda$ snižuje  očekávaný zisk, ale zásadně redukuje riziko extrémních ztrát.
+      \item Růst $\lambda$ snižuje očekávaný zisk, ale zásadně redukuje riziko extrémních ztrát.
       \item Pro predikce jsme vybrali \textbf{$\boldsymbol{\lambda}$ = 0,5} jako referenční variantu, která nabízí vyvážený kompromis mezi očekávaným ziskem a rizikem.
     \end{itemize}
   \end{block}
@@ -152,26 +148,26 @@
 
 \begin{frame}{Vybrané plodiny pro \(\lambda=0.5\) (původní plán)}
   \begin{center}
-     \includegraphics[width=1.0\textwidth]{graf_plan_lambda_05_histogram.png}
+    \includegraphics[width=1.0\textwidth]{vystupy/graf_plan_lambda_05_histogram.png}
   \end{center}
   \vspace{0.15cm}
   \begin{footnotesize}
-    Základní plán dělí 1 000 ha mezi stabilní polní plodiny a ziskovější zeleninu (česnek, zelí, salát) s bramborami. Tento plán předpokládá stabilní náklady, ale vyžaduje vysoký rozpočet (157 mil. Kč). Při zdražení vstupů vykazuje 25,9\% riziko ztráty.
+    Základní plán dělí 1 000 ha mezi stabilní polní plodiny a ziskovější zeleninu (česnek, zelí, salát) s bramborami. Vyžaduje rozpočet 157 mil. Kč. Při růstu nákladů jako v roce 2022 činí očekávaný zisk 25,1 mil. Kč a riziko ztráty 25,9\%.
   \end{footnotesize}
 \end{frame}
 
 \begin{frame}{Vybrané plodiny pro \(\lambda=0.5\) (po rozšíření)}
   \begin{center}
-     \includegraphics[width=1.0\textwidth]{graf_odolny_plan.png}
+    \includegraphics[width=1.0\textwidth]{vystupy/graf_odolny_plan.png}
   \end{center}
   \vspace{0.15cm}
   \begin{footnotesize}
-    Odolný plán nahrazuje rizikové brambory a část česneku cibulí (89 ha) a cukrovou řepou (50 ha). Tím snižuje potřebný rozpočet na 110 mil. Kč (úspora 47 mil. Kč) a zásadně omezuje riziko ztráty při zdražení vstupů ze 25,9 \% na 15,7 \%.
+    Odolný plán nahrazuje rizikové brambory a část česneku cibulí (89 ha) a cukrovou řepou (50 ha). Potřebuje rozpočet 110 mil. Kč (o 47 mil. Kč méně). Při růstu nákladů jako v roce 2022 dosahuje očekávaný zisk 22,3 mil. Kč a riziko ztráty klesá z 25,9\% na 15,7\%.
   \end{footnotesize}
 \end{frame}
 
 \begin{frame}{Doporučení a implikace}
-  \begin{block}
+  \begin{block}{Doporučení}
     \small
     \begin{itemize}
       \item Doporučujeme realizovat \textbf{Odolný osevní plán}, který šetří 47 mil. Kč v rozpočtu a výrazně snižuje riziko ztráty při zdražení vstupů.
@@ -203,12 +199,10 @@
 \begin{frame}{Diskuze nad rámec zadání}
   \begin{itemize}
     \item Národní data neprokázala statisticky významné vazby, kvůli kterým by bylo nutné některé plodiny zakázat. V lokálních podmínkách farmy je však vhodné korelace dále prověřit.
-    
-    \vspace{0.35cm}
-    \item V základním modelu se nepočítá s mezemi a dělením na konkrétní parcely, což v reálném provozu mírně snižuje využitelnou plochu.
-    
     \vspace{0.35cm}
     \item Výsledný model poskytuje stabilní jádro, které lze na farmě zpřesnit o reálná data a místní podmínky.
+    \vspace{0.35cm}
+    \item Pro další modelování by bylo vhodné zařadit i dopad na půdu jednotlivých plodin a jejich střídání, aby se zajistila dlouhodobá udržitelnost a zdraví půdy.
   \end{itemize}
 \end{frame}
 

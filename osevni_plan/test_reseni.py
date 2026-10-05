@@ -201,6 +201,21 @@ def test_minimax_litost_neni_horsi_nez_plan_pro_jeden_scenar(uloha):
         assert nejvetsi <= nejvetsi_litost(op.optimalizuj(M, om)) + 2e3
 
 
+def test_odolny_plan_podle_lambda(uloha):
+    T, C, om = uloha
+    scenare = [nr.ScenarNakladu("základ", 1.0, 1.0), nr.ScenarNakladu("růst", 1.1, 1.1)]
+    marze = [T - nr.naklady_scenare(C, om.zelenina, s) for s in scenare]
+    nazvy = [dt.NAZVY[k] for k in dt.KODY]
+
+    tab = nr.krok_odolny_podle_lambda(T, C, om, scenare, nazvy)
+
+    assert tab.columns.tolist() == [f"lambda_{lam}" for lam in nr.LAMBDY_ODOLNEHO_PLANU]
+    assert tab.sum(axis=0).to_numpy() == pytest.approx(np.full(5, op.ROZLOHA), abs=0.5)
+    assert tab.loc[tab.index.isin(np.array(nazvy)[om.zelenina])].sum(axis=0).max() <= op.MAX_ZELENINA + 0.5
+    plan_05, _ = op.minimax_litost(marze, om, lam=0.5)
+    assert tab["lambda_0.5"].reindex(nazvy, fill_value=0).to_numpy() == pytest.approx(plan_05, abs=0.05)
+
+
 def test_cisla_v_textu_odpovidaji_vystupum():
     """DOPLNENI_ZADANI.md musí obsahovat čísla z posledního běhu spust.py."""
     koren = Path(__file__).resolve().parent
